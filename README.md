@@ -76,7 +76,7 @@ System Alerts: Important notifications use a distinct style for quick identifica
 
 - Frontend: React (for a responsive and modern user interface).
 - Backend: Node.js with Express (handling authentication, challenge delivery, and analytics).
-- Database: PostgreSQL (secure storage of user records, submissions, and analytics).
+- Database: MongoDB (secure storage of user records, submissions, and analytics).
 - AI Integration: OpenAI API (for AI-powered verification and suggestions).
 - OAuth: GitHub/Google APIs for seamless authentication.
 
