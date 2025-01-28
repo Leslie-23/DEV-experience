@@ -123,3 +123,90 @@ exports.viewUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+//
+// const User = require("../models/User");
+const Utility = require("../utils/utility");
+
+// Set the reminder time for the logged-in user
+exports.setReminderTime = async (req, res) => {
+  try {
+    // Ensure req.user exists
+    if (!req.user || !req.user.email) {
+      return res.status(400).json({ message: "User not authenticated" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message, stack: error.stack });
+  }
+
+  try {
+    const { email } = req.user; // Assume email is from authentication middleware
+    const { reminderTime } = req.body;
+
+    const user = await User.findOneAndUpdate(
+      { email },
+      { reminderTime },
+      { new: true }
+    );
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res
+      .status(200)
+      .json({ message: "Reminder time updated successfully", user });
+  } catch (error) {
+    res.status(500).json({ error: error.message, stack: error.stack });
+  }
+};
+
+// Send daily problem set based on user reminder time
+exports.sendDailyProblemSet = async (req, res) => {
+  try {
+    const { email } = req.user;
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    // Generate new problems
+    const problems = Utility.generateProblemSet();
+    user.problemSetHistory.push({ date: new Date(), problems });
+    await user.save();
+
+    // Optionally, send email or push notification here
+    res
+      .status(200)
+      .json({ message: "Daily problem set sent successfully", problems });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Handle code submission from the user
+exports.submitCodeSubmission = async (req, res) => {
+  try {
+    const { email } = req.user; // Assume email is from authentication middleware
+    const { problemId, submittedAnswer } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const submission = {
+      problemId,
+      submittedAnswer,
+      submissionDate: new Date(),
+      status: "pending", // Status can be updated later by an AI or manual review
+    };
+
+    user.submissions.push(submission);
+    await user.save();
+
+    res.status(200).json({ message: "Code submission received", submission });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// module.exports = {
+//   setReminderTime,
+//   sendDailyProblemSet,
+//   submitCodeSubmission,
+// };
