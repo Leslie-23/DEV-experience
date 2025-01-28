@@ -30,7 +30,7 @@ app.use("/api/users", userAdminRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
-  res.send("API is running...");
+  res.send("API is running... yippy");
 });
 
 // Start Server
