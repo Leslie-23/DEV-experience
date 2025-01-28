@@ -1,6 +1,6 @@
 require("dotenv").config(); // Load environment variables
 const express = require("express");
-const connectDB = require("./config/database");
+const connectDB = require("./config/db");
 
 const userRoutes = require("./routes/user-routes");
 const userAdminRoutes = require("./routes/user-routes");
