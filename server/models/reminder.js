@@ -10,4 +10,6 @@ const ReminderSchema = new mongoose.Schema({
   reminderTime: { type: String, required: true }, // Format: HH:mm
 });
 
-module.exports = mongoose.model("Reminder", ReminderSchema);
+// module.exports = mongoose.model("Reminder", ReminderSchema);
+module.exports =
+  mongoose.models.Reminder || mongoose.model("Reminder", ReminderSchema);

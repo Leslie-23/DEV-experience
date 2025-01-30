@@ -126,7 +126,7 @@ exports.viewUser = async (req, res) => {
 
 //
 // const User = require("../models/User");
-const Utility = require("../utils/utility");
+const Utility = require("../utils/Utility");
 
 // Set the reminder time for the logged-in user
 exports.setReminderTime = async (req, res) => {
@@ -205,6 +205,47 @@ exports.submitCodeSubmission = async (req, res) => {
   }
 };
 
+// ✅ Update User's Language Preferences
+exports.setUserLanguages = async (req, res) => {
+  try {
+    const { userId } = req.user; // Extract user from JWT middleware
+    const { languages } = req.body;
+
+    // Validate that languages is an array
+    if (!Array.isArray(languages) || languages.length === 0) {
+      return res
+        .status(400)
+        .json({ message: "Languages must be a non-empty array" });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { languages },
+      { new: true, upsert: true }
+    );
+
+    res.status(200).json({
+      message: "Languages updated successfully",
+      languages: user.languages,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// ✅ Get User's Language Preferences
+exports.getUserLanguages = async (req, res) => {
+  try {
+    const { userId } = req.user;
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json({ languages: user.languages });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 // module.exports = {
 //   setReminderTime,
 //   sendDailyProblemSet,
