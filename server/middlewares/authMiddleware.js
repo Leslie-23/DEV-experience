@@ -1,12 +1,14 @@
 const jwt = require("jsonwebtoken");
 
 exports.authMiddleware = (req, res, next) => {
-  const token = req.header("Authorization")?.replace("Bearer ", "");
-  if (!token) return res.status(401).json({ message: "Unauthorized" });
+  const authHeader = req.header("Authorization");
+  if (!authHeader)
+    return res.status(401).json({ message: "Unauthorized: No token provided" });
 
+  const token = authHeader.replace("Bearer ", "").trim();
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = { email: decoded.email }; // Attach email to req.user
+    req.user = { userId: decoded.id, role: decoded.role }; // Use `userId` instead of email
     next();
   } catch (error) {
     res.status(401).json({ message: "Invalid token", error: error.message });
