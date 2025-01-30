@@ -1,9 +1,11 @@
 require("dotenv").config(); // Load environment variables
+require("./scheduler/problemSetScheduler"); // Start the cron job when server runs
 const express = require("express");
 const connectDB = require("./config/db");
 
 const userRoutes = require("./routes/user-routes");
 const userAdminRoutes = require("./routes/user-routes");
+const userReminderRoutes = require("./routes/reminder-routes");
 
 const cors = require("cors");
 
@@ -27,6 +29,7 @@ app.use(express.json()); // To parse JSON bodies
 
 app.use("/api/user", userRoutes);
 app.use("/api/users", userAdminRoutes);
+app.use("/api/user", userReminderRoutes);
 
 // Home Route
 app.get("/", (req, res) => {

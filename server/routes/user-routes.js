@@ -17,6 +17,10 @@ const {
   sendDailyProblemSet,
 } = require("../controllers/user-controller");
 const { authMiddleware } = require("../middlewares/authMiddleware");
+const {
+  setUserLanguages,
+  getUserLanguages,
+} = require("../controllers/user-controller");
 
 const router = express.Router();
 
@@ -33,7 +37,10 @@ router.get("/viewAll", viewAllUsers); // View all users
 router.get("/view/:userId", viewUser); // View specific user
 
 // Routes for reminders
-router.post("/set-reminder", authMiddleware, setReminderTime);
+
+router.post("/set-languages", authMiddleware, setUserLanguages);
+router.get("/get-languages", authMiddleware, getUserLanguages);
+// router.post("/set-reminder", authMiddleware, setReminderTime); //sent to reminder-route
 router.post("/submit-answer", submitCodeSubmission);
 
 // For periodic problem set sending, this can be triggered by a scheduled job.
