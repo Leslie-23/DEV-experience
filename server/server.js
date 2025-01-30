@@ -33,7 +33,18 @@ app.use("/api/user", userReminderRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
-  res.send("API is running... yippy");
+  const data = {
+    message: "API is live",
+    status: 200,
+    data: "Welcome to the API!",
+    timestamp: new Date(),
+  };
+  res.json(data);
+  // res.send("API is running... yippy");
+  // res.sendFile(path.join(__dirname, "client", "frontend", "index.html")); // to better handle API landing page
+});
+app.get("/test", (req, res) => {
+  res.send("--test \n API is live.");
 });
 
 // Start Server
