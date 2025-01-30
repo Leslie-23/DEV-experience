@@ -1,11 +1,11 @@
 import React from 'react'
 import './App.css'
-import {Routes} from 'react-router-dom'
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react'
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,9 +31,10 @@ const App = () => {
   return (
     <div>
      <RouterProvider router={router}/>
-   
 
     </div>
+  
+    
   )
 }
 

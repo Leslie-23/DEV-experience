@@ -21,6 +21,7 @@
     object-fit: cover; 
     z-index: -1;
     position: fixed;
+   
   }
   
   /* Main content styles */
@@ -29,12 +30,11 @@
     z-index: 1; 
     text-align: center;
     padding: 2rem;
-  
   }
   
   /* Main message text styles */
   .main-message {
-    font-size: 2.5rem;
+    font-size: 2.7rem;
     font-weight: bold;
     margin-bottom: 1rem;
   }
@@ -51,19 +51,18 @@
    padding: 12px 30px;
    border-radius: 24px;
    border: none;
-   background-color: rgba(147, 144, 144, 0.199);
-   color: white !important;
-   font-size: 14px;
-   border: 1.5px solid rgba(147, 144, 144, 0.199);
+   background: transparent;
+   backdrop-filter: blur(10px);
+   color: white ;
+   border: 1.5px solid rgba(255, 255, 255, 0.3);
    transition: all 0.3s ease-in-out;
 }
 .sign-in-button:hover{
    cursor: pointer;
-   background-color: transparent;
    border: 1.5px solid rgba(164, 164, 164, 0.368);
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
 }
-  
-
 
 .cl-internal-mp6rdp {
     background: rgba(192, 192, 192, 0.08);
@@ -81,7 +80,21 @@
 .cl-internal-1v2koqu:hover {
     color: rgb(255, 255, 255);
 }
-
+.cl-internal-1ftpdtb {
+  background-color: rgb(255 255 255 / 91%);
+}
+.cl-internal-8n8gd5 {
+  color: white;
+  outline: rgba(158, 158, 158, 0.432) solid 1.5px;
+  accent-color: rgb(47, 48, 55);
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 0px 1px 0px;
+  background-color: rgba(8, 8, 8, 0.08);
+}
+.cl-internal-1roqnsq {
+  background-color: rgba(8, 8, 8, 0.08);
+  outline: rgba(158, 158, 158, 0.432) solid 1.5px;
+  color: white;
+}
 .about{
     min-height: 100vh;
     display: flex;
@@ -127,5 +140,55 @@
   }
   .about-message{
     width: 100%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+.animated-text {
+  font-size: 165px;
+  font-weight: bold;
+  fill: none; 
+  stroke: white; 
+  stroke-width: 3.5;
+  stroke-dasharray: 1000; 
+  stroke-dashoffset: 1000; 
+  animation: drawText 5s linear forwards;
+}
+
+@keyframes drawText {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Optional fill effect */
+.animated-text {
+  animation: drawText 3s linear infinite alternate, fillText 6s ease-in-out 3s infinite alternate;
+
+}
+
+@keyframes fillText {
+  to {
+    fill: white; 
+  }
+}
+svg {
+  all: unset; /* Reset all inherited styles */
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+@media(max-width: 768px){
+  .animated-text {
+    font-size: 95px;
   }
 }

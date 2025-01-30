@@ -1,10 +1,11 @@
 import React from 'react'
+import './Footer.css'
 
 const Footer = () => {
   return (
-    <footer className='flex items-center justify-center h-10 text-[12px]'>
+    <footer className='footer'>
         <aside>
-    <p>Copyright © {new Date().getFullYear()} - All right reserved by DevEx</p>
+    <p>Copyright © {new Date().getFullYear()} - All rights reserved by DevEx</p>
   </aside>
 
     </footer>

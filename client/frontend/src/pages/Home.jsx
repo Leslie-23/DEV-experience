@@ -4,7 +4,7 @@ import './Home.css'
 import Typewriter from "typewriter-effect";
 import landingbg from '../assets/landingbg.mp4'
 import Footer from '../Components/Footer';
-import HomePlus from './HomePlus';
+
 const CURSOR_SIZE = 20;
 
 
@@ -43,7 +43,7 @@ const Home = () => {
         <source src={landingbg} type="video/mp4" />
       </video>
       <div className='main-content'>
-      <p className='main-message'><Typewriter
+      {/* <p className='main-message'><Typewriter
           options={{
             strings: ["Welcome to the Dev Experience"],
             autoStart: true,
@@ -53,26 +53,19 @@ const Home = () => {
             cursor: "",
           }}
         />
-        </p>
-        {/* <p className='about-message'>DevEx is a productivity platform for developers that helps track tasks, monitor progress, and stay consistent, all while streamlining collaboration and enhancing accountability.
         </p> */}
+        <svg viewBox="0 0 800 200" width="100%" height="50">
+      <text x="50%" y="50%" textAnchor="middle" className="animated-text">
+        The Developer Experience
+      </text>
+    </svg>
       <SignInButton mode='modal' forceRedirectUrl={'/dashboard'} className='sign-in-button'/>
-      
-      
       </div>
     </div>
 
     <div className='footer'>
       <Footer/>
       </div>
-      {/* <div className='about'>
-        <div className='about-content'>
-        <h1>What is Dev Experience?</h1>
-        <p className='about-message'>The Dev Experience (DevEx) is a productivity platform designed to help developers stay accountable, maintain high levels of productivity, and build consistency in their work. The platform provides developers with a seamless experience in managing tasks, tracking progress, and collaborating efficiently.</p>
-       
-        </div>
-        
-      </div> */}
    </>
   )
 }
