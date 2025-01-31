@@ -19,6 +19,9 @@ exports.adminLogin = async (req, res) => {
 
     const token = generateToken(admin._id, admin.role);
     res.status(200).json({ token, adminId: admin._id });
+    localStorage.setItem("token", token);
+    localStorage.SetItem("adminId", admin.id);
+    localStorage.SetItem("adminId", admin._id);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

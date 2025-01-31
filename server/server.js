@@ -6,6 +6,7 @@ const connectDB = require("./config/db");
 const userRoutes = require("./routes/user-routes");
 const userAdminRoutes = require("./routes/user-routes");
 const userReminderRoutes = require("./routes/reminder-routes");
+const submissionRoutes = require("./routes/submission-routes");
 
 const cors = require("cors");
 
@@ -21,15 +22,18 @@ app.use(
   })
 );
 
-app.options("*", cors());
+app.options("*", cors()); // Enable CORS for all routes. CORS is a real security risk and a B*tch to set up
 
 connectDB();
 
 app.use(express.json()); // To parse JSON bodies
-
+// user related routes
 app.use("/api/user", userRoutes);
 app.use("/api/users", userAdminRoutes);
 app.use("/api/user", userReminderRoutes);
+
+// Submission routes
+app.use("/api/submission", submissionRoutes);
 
 // Home Route
 app.get("/", (req, res) => {

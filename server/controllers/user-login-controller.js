@@ -22,8 +22,9 @@ exports.userLogin = async (req, res) => {
 
     const token = generateToken(user._id, "user");
     res.status(200).json({ token, userId: user._id });
-    // localStorage.setItem("token", token);
-    // localStorage.SetItem("userId", user.id);
+    localStorage.setItem("token", token);
+    localStorage.SetItem("userId", user.id);
+    localStorage.SetItem("userId", user._id);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

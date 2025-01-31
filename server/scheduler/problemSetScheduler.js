@@ -4,7 +4,7 @@ const User = require("../models/User");
 const { sendEmail } = require("../utils/emailService");
 const Utility = require("../utils/Utility");
 
-// ✅ Scheduler runs every minute to check for users who need a problem set
+// Scheduler runs every minute to check for users who need a problem set
 cron.schedule("* * * * *", async () => {
   console.log("⏳ Checking for users to send problem sets...");
 
@@ -32,7 +32,7 @@ cron.schedule("* * * * *", async () => {
         .map((p) => `- ${p.question} (${p.difficulty})`)
         .join("\n")}`;
 
-      // ✅ Send email to the correct logged-in user
+      // Send email to the correct logged-in user
       await sendEmail(
         reminder.user.email,
         "Your Daily Coding Problem Set",
@@ -48,7 +48,7 @@ cron.schedule("* * * * *", async () => {
 // const User = require("../models/User");
 // const Utility = require("../utils/Utility");
 
-// // ✅ Runs every minute and checks if a user should receive problems
+// //  Runs every minute and checks if a user should receive problems
 // cron.schedule("* * * * *", async () => {
 //   const now = new Date();
 //   const currentTime = `${now.getHours().toString().padStart(2, "0")}:${now
