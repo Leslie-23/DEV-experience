@@ -7,11 +7,13 @@ const userRoutes = require("./routes/user-routes");
 const userAdminRoutes = require("./routes/user-routes");
 const userReminderRoutes = require("./routes/reminder-routes");
 const submissionRoutes = require("./routes/submission-routes");
+const { ClerkExpressWithAuth } = require("@clerk/clerk-sdk-node");
 
 const cors = require("cors");
 
 const app = express();
 app.use(express.json());
+app.use(ClerkExpressWithAuth());
 
 // Use CORS middleware
 app.use(
@@ -19,6 +21,7 @@ app.use(
     origin: "http://localhost:5173", // Allow only this origin
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    credentials: true, // Allow cookies and authorization headers
   })
 );
 
