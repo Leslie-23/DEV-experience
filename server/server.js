@@ -26,13 +26,15 @@ connectDB();
 // Use CORS middleware
 app.use(
   cors({
-    origin: ["http://localhost:5173","https://dev-experience-sj2j-kbjftg70q-leslie-23s-projects.vercel.app/"] // Allow only this origin
+    origin: [
+      "http://localhost:5173",
+      "https://dev-experience-sj2j-kbjftg70q-leslie-23s-projects.vercel.app/",
+    ], // Allow only this origin
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
     credentials: true, // Allow cookies and authorization headers
   })
 );
-
 
 // user related routes
 app.use("/api/user", userRoutes);
