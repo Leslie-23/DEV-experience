@@ -12,6 +12,8 @@ import Dashboard from "./pages/Dashboard";
 // import AdminPanel from "./pages/AdminPanel";
 import SetReminder from "./pages/SetReminder";
 import Submissions from "./pages/Submissions";
+import Profile from "./components/Profile";
+import Settings from "./components/Settings";
 import NotFound from "./pages/404";
 import "./App.css";
 
@@ -34,6 +36,8 @@ function App() {
         */}
         <Route path="/set-reminder" element={<SetReminder />} />
         <Route path="/submissions" element={<Submissions />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

@@ -80,7 +80,7 @@ const Dashboard = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/profile"
                 className="block py-2 px-4 text-gray-800 hover:bg-indigo-600 hover:text-white transition duration-200"
               >
                 Profile
@@ -88,7 +88,7 @@ const Dashboard = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/settings"
                 className="block py-2 px-4 text-gray-800 hover:bg-indigo-600 hover:text-white transition duration-200"
               >
                 Settings
@@ -173,7 +173,7 @@ const Dashboard = () => {
                 Configure your dashboard settings, theme, and notifications.
               </p>
               <button className="mt-4 text-indigo-600 hover:text-indigo-700">
-                Go to Settings
+                <a href="/settings">Go to Settings</a>
               </button>
             </div>
           </div>

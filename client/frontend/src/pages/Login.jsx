@@ -34,6 +34,7 @@ const Login = () => {
       if (response.status === 200) {
         // Save the token or user info (optional)
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", response.data.userId);
 
         // Redirect to dashboard or home page
         navigate("/dashboard");

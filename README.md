@@ -85,3 +85,5 @@ System Alerts: Important notifications use a distinct style for quick identifica
 - Community Features: Forums or chats for developers to collaborate and share tips.
 - Open Source Integration: Tools to help users contribute to open source projects.
 - Advanced AI Features: More robust analysis of coding patterns for deeper insights.
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/48830347-3274-4f98-8802-3aec9196c0f2/deploy-status)](https://app.netlify.com/sites/dev-experience-2k25/deploys)
