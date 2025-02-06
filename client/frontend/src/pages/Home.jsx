@@ -1,145 +1,48 @@
-import { SignInButton, SignedOut } from "@clerk/clerk-react";
-import React, { useEffect, useState } from "react";
-import "./Home.css";
-import Typewriter from "typewriter-effect";
-import landingbg from "../assets/landingbg.mp4";
-import Footer from "../Components/Footer";
-
-const CURSOR_SIZE = 20;
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setCursorPosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
   return (
-    <>
-      <div className="home-container">
-        <div
-          style={{
-            width: `${CURSOR_SIZE}px`,
-            height: `${CURSOR_SIZE}px`,
-            backgroundColor: "indigo",
-            borderRadius: "50%",
-            position: "fixed",
-            top: `${cursorPosition.y - CURSOR_SIZE / 2}px`,
-            left: `${cursorPosition.x - CURSOR_SIZE / 2}px`,
-            pointerEvents: "none",
-            zIndex: 9999,
-            transition: "transform 10s ease",
-            delay: "20s",
-          }}
-        ></div>
-        <video autoPlay muted loop playsInline className="background-video">
-          <source src={landingbg} type="video/mp4" />
-        </video>
-        <div className="main-content">
-          <svg viewBox="0 0 800 200" width="100%" height="50">
-            <text x="50%" y="50%" textAnchor="middle" className="animated-text">
-              The Developer Experience
-            </text>
-          </svg>
-
-          {/* Show SignInButton only when user is SignedOut */}
-          <SignedOut>
-            <SignInButton
-              mode="modal"
-              forceRedirectUrl={"/dashboard"}
-              className="sign-in-button"
-            />
-          </SignedOut>
+    <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-500 to-green-800 text-white px-6">
+      <div className="max-w-5xl text-center">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
+          Elevate Your Coding Skills with Daily Challenges
+        </h1>
+        <p className="text-lg md:text-xl mb-6 leading-relaxed">
+          Welcome to your personal coding hub! Our platform brings you a daily
+          set of coding challenges in a variety of categories—from Algorithms
+          and Data Structures to System Design. Whether you’re just starting or
+          looking to deepen your skills, our platform tailors problems to your
+          experience level, helping you grow one challenge at a time.
+        </p>
+        <p className="text-md md:text-lg mb-8 opacity-80">
+          Track your progress, compare your solutions with others, and receive
+          detailed feedback on code quality and correctness. Our AI-driven
+          platform offers a comprehensive learning path designed to improve your
+          problem-solving abilities.
+        </p>
+        <p className="text-md md:text-lg mb-6 opacity-75">
+          Get started by logging in or creating an account. Join our community
+          and make learning to code fun and engaging, with daily streaks,
+          performance badges, and global leaderboards to keep you motivated.
+        </p>
+        <div className="flex flex-col md:flex-row gap-4">
+          <Link
+            to="/login"
+            className="bg-white text-green-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-200 transition"
+          >
+            Login
+          </Link>
+          <Link
+            to="/signup"
+            className="bg-yellow-500 text-white font-semibold px-6 py-3 rounded-lg hover:bg-yellow-600 transition"
+          >
+            Sign Up
+          </Link>
         </div>
       </div>
-
-      <div className="footer">
-        <Footer />
-      </div>
-    </>
+    </section>
   );
 };
 
 export default Home;
-
-// Elton133's code below. I don't understand it, so i have a fix above
-
-// import { SignInButton } from '@clerk/clerk-react'
-// import React, {useEffect, useState}from 'react'
-// import './Home.css'
-// import Typewriter from "typewriter-effect";
-// import landingbg from '../assets/landingbg.mp4'
-// import Footer from '../Components/Footer';
-
-// const CURSOR_SIZE = 20;
-
-// const Home = () => {
-//     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-
-//     useEffect(() => {
-//         const handleMouseMove = (e) => {
-//           setCursorPosition({ x: e.clientX, y: e.clientY });
-//         };
-
-//         window.addEventListener("mousemove", handleMouseMove);
-//         return () => {
-//           window.removeEventListener("mousemove", handleMouseMove);
-//         };
-//       }, []);
-//   return (
-//     <>
-//     <div className='home-container'>
-//        <div
-//       style={{
-//         width: `${CURSOR_SIZE}px`,
-//         height: `${CURSOR_SIZE}px`,
-//         backgroundColor: "indigo",
-//         borderRadius: "50%",
-//         position: "fixed",
-//         top: `${cursorPosition.y - CURSOR_SIZE / 2}px`,
-//         left: `${cursorPosition.x - CURSOR_SIZE / 2}px`,
-//         pointerEvents: "none",
-//         zIndex: 9999,
-//         transition: "transform 10s ease",
-//         delay: "20s",
-//       }}
-//     ></div>
-//         <video autoPlay muted loop playsInline className="background-video">
-//         <source src={landingbg} type="video/mp4" />
-//       </video>
-//       <div className='main-content'>
-//       {/* <p className='main-message'><Typewriter
-//           options={{
-//             strings: ["Welcome to the Dev Experience"],
-//             autoStart: true,
-//             loop: false,
-//             delay: 50,
-//             deleteSpeed:Infinity,
-//             cursor: "",
-//           }}
-//         />
-//         </p> */}
-//         <svg viewBox="0 0 800 200" width="100%" height="50">
-//       <text x="50%" y="50%" textAnchor="middle" className="animated-text">
-//         The Developer Experience
-//       </text>
-//     </svg>
-//       <SignInButton mode='modal' forceRedirectUrl={'/dashboard'} className='sign-in-button'/>
-//       </div>
-//     </div>
-
-//     <div className='footer'>
-//       <Footer/>
-//       </div>
-//    </>
-//   )
-// }
-
-// export default Home

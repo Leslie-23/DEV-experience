@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -5,13 +9,13 @@
 }
 
 ::-webkit-scrollbar {
-  width: 8px; 
+  width: 8px;
   background-color: black;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(77, 77, 77, 0.938); 
-  border-radius: 12px; 
+  background: rgba(77, 77, 77, 0.938);
+  border-radius: 12px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -22,8 +26,7 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
-
-body{
-  font-family: 'Raleway', sans-serif;
-  background-color:rgba(77, 77, 77, 0.938);
+body {
+  font-family: "Raleway", sans-serif;
+  background-color: rgba(77, 77, 77, 0.938);
 }
