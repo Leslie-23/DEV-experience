@@ -1,8 +1,8 @@
 const cron = require("node-cron");
 const Reminder = require("../models/reminder");
-const User = require("../models/user");
+const User = require("../models/User");
 const { sendEmail } = require("../utils/emailService");
-const Utility = require("../utils/Utility");
+const Utility = require("../utils/Utility.js");
 
 // Scheduler runs every minute to check for users who need a problem set
 cron.schedule("* * * * *", async () => {
