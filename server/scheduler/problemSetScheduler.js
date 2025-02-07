@@ -11,7 +11,8 @@ console.log(
 
 const cron = require("node-cron");
 const Reminder = require("../models/reminder.js");
-const User = require("../models/User");
+console.log(`${Reminder}`);
+// const User = require("../models/User");
 const { sendEmail } = require("../utils/emailService");
 const Utility = require("../utils/Utility.js");
 
