@@ -1,12 +1,16 @@
 // checking if the file exists
 const fs = require("fs");
 console.log(
-  "Checking Reminder model existence:",
+  "Checking Reminder model existence: ./models/Reminder.js",
   fs.existsSync("./models/Reminder.js")
+);
+console.log(
+  "Checking Reminder model existence: ../models/Reminder.js",
+  fs.existsSync("../models/Reminder.js")
 );
 
 const cron = require("node-cron");
-const Reminder = require("../models/Reminder.js");
+const Reminder = require("../models/reminder.js");
 const User = require("../models/User");
 const { sendEmail } = require("../utils/emailService");
 const Utility = require("../utils/Utility.js");
