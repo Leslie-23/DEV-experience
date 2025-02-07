@@ -1,3 +1,10 @@
+// checking if the file exists
+const fs = require("fs");
+console.log(
+  "Checking Reminder model existence:",
+  fs.existsSync("./models/Reminder.js")
+);
+
 const cron = require("node-cron");
 const Reminder = require("../models/Reminder.js");
 const User = require("../models/User");
