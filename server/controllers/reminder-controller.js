@@ -1,4 +1,4 @@
-const Reminder = require("../models/reminder.js");
+const Reminder = require("../models/Reminder.js");
 
 // ✅ Set or Update Reminder for the Logged-in User
 exports.setReminder = async (req, res) => {
