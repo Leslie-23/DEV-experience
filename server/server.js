@@ -53,16 +53,22 @@ app.get("/", (req, res) => {
     timestamp: new Date(),
   };
   res.json(data);
+
   // res.send("API is running... yippy");
   // res.sendFile(path.join(__dirname, "client", "frontend", "index.html")); // to better handle API landing page
+});
+
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
 });
 app.get("/test", (req, res) => {
   res.send("--test \n API is live.");
 });
 
 // Start Server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
 module.exports = app;
