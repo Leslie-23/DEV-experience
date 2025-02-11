@@ -49,8 +49,8 @@ app.get("/", (req, res) => {
   const data = {
     message: "API is live",
     status: 200,
-    data: "Welcome to the API!",
-    timestamp: new Date(),
+    // data: "Welcome to the API!",
+    // timestamp: new Date(),
   };
   res.json(data);
 
@@ -67,8 +67,8 @@ app.get("/test", (req, res) => {
 });
 
 // Start Server
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 module.exports = app;
