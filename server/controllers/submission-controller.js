@@ -1,6 +1,6 @@
-const Submission = require("../models/Submission");
-const Question = require("../models/Question");
-const { checkAnswer } = require("../services/aiService");
+const Submission = require("../models/submissions");
+const Question = require("../models/questions");
+const { checkAnswer } = require("../services/aiServices");
 
 const submitAnswer = async (req, res) => {
   const { userId, questionId, userAnswer } = req.body;

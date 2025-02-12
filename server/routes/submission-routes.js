@@ -1,14 +1,27 @@
 const express = require("express");
 const {
-  getQuestions,
-  syncQuestions,
-} = require("../controllers/question-controller");
-const { checkAnswer } = require("../services/aiServices");
+  submitAnswer,
+  getUserSubmissions,
+} = require("../controllers/submission-controller");
 
 const router = express.Router();
 
-router.get("/get-questions", getQuestions);
-router.post("/sync", syncQuestions);
-router.post("/ai-check", checkAnswer);
+router.post("/submit", submitAnswer); // Ensure submitAnswer is defined
+router.get("/submissions/:userId", getUserSubmissions); // Ensure getUserSubmissions is defined
 
 module.exports = router;
+
+// const express = require("express");
+// const {
+//   getQuestions,
+//   syncQuestions,
+// } = require("../controllers/question-controller");
+// const { checkAnswer } = require("../services/aiServices");
+
+// const router = express.Router();
+
+// router.get("/get-questions", getQuestions);
+// router.post("/sync", syncQuestions);
+// router.post("/ai-check", checkAnswer);
+
+// module.exports = router;

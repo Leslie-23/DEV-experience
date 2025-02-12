@@ -39,6 +39,7 @@ router.get("/view/:userId", viewUser); // View specific user
 // Routes for reminders
 
 router.post("/set-languages", authMiddleware, setUserLanguages);
+router.put("/set-languages", authMiddleware, setUserLanguages);
 router.get("/get-languages", authMiddleware, getUserLanguages);
 // router.post("/set-reminder", authMiddleware, setReminderTime); //sent to reminder-route
 router.post("/submit-answer", submitCodeSubmission);

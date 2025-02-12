@@ -15,6 +15,7 @@ import Submissions from "./pages/Submissions";
 import Profile from "./components/Profile";
 import Settings from "./components/Settings";
 import NotFound from "./pages/404";
+import SetLanguages from "./pages/SetLanguages";
 import "./App.css";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/submissions" element={<Submissions />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/languages" element={<SetLanguages />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

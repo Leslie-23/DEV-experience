@@ -4,6 +4,7 @@ exports.authMiddleware = (req, res, next) => {
   const authHeader = req.header("Authorization");
   if (!authHeader)
     return res.status(401).json({ message: "Unauthorized: No token provided" });
+  //console.log("Received Token:", req.header("Authorization"));
 
   const token = authHeader.replace("Bearer ", "").trim();
   try {

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const QuestionSchema = new mongoose.Schema({
-  codeforcesId: { type: Number, required: true, unique: true },
-  name: { type: String, required: true },
-  tags: [String], // Filtering purposes
-  difficulty: String, // Easy, Medium, Hard
+  question: String,
+  options: [String], // Store multiple choices
+  correctAnswer: String, // Store the correct option
+  difficulty: { type: String, enum: ["Easy", "Medium", "Hard"] },
   statement: String, // Problem statement
 });
 

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [userLanguages, setUserLanguages] = useState([]);
+  const hasFetched = useRef(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -10,6 +12,31 @@ const Dashboard = () => {
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
+
+  // Function to fetch selected languages
+  const fetchUserLanguages = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/user/get-languages",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      ); // Update with actual API route
+      console.log(response);
+      const data = response;
+      setUserLanguages(data.data.languages || []);
+    } catch (error) {
+      console.error("Error fetching languages:", error);
+    }
+  };
+  useEffect(() => {
+    if (!hasFetched.current) {
+      fetchUserLanguages();
+      hasFetched.current = true; // Mark as executed
+    }
+  }, []);
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -56,7 +83,7 @@ const Dashboard = () => {
             </li>
             <li>
               <a
-                href="/set-timer"
+                href="/set-reminder"
                 className="block py-2 px-4 text-gray-800 hover:bg-indigo-600 hover:text-white transition duration-200"
               >
                 Set Daily Timer
@@ -84,6 +111,14 @@ const Dashboard = () => {
                 className="block py-2 px-4 text-gray-800 hover:bg-indigo-600 hover:text-white transition duration-200"
               >
                 Profile
+              </a>
+            </li>
+            <li>
+              <a
+                href="/languages"
+                className="block py-2 px-4 text-gray-800 hover:bg-indigo-600 hover:text-white transition duration-200"
+              >
+                Languages
               </a>
             </li>
             <li>
@@ -175,6 +210,42 @@ const Dashboard = () => {
               <button className="mt-4 text-indigo-600 hover:text-indigo-700">
                 <a href="/settings">Go to Settings</a>
               </button>
+            </div>
+
+            {/* Languages Card */}
+            <div className="mt-6 bg-white p-6 rounded-lg shadow-lg">
+              <h3 className="text-xl font-semibold text-gray-800">
+                Your Preferred Languages
+              </h3>
+
+              {userLanguages.length > 0 ? (
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {userLanguages.map((lang, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 rounded-full text-white text-sm font-semibold"
+                      style={{
+                        backgroundColor: `hsl(${
+                          Math.random() * 360
+                        }, 70%, 50%)`,
+                      }}
+                    >
+                      {lang}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <p className="mt-4 text-gray-600">
+                  You haven't selected any languages yet.
+                  <a
+                    href="/languages"
+                    className="text-indigo-600 hover:underline"
+                  >
+                    {" "}
+                    Choose your languages here.
+                  </a>
+                </p>
+              )}
             </div>
           </div>
         </main>

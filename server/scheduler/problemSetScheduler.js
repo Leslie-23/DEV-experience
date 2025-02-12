@@ -11,7 +11,7 @@ console.log(
 
 const cron = require("node-cron");
 const Reminder = require("../models/reminder.js");
-console.log(`${Reminder}`);
+// console.log(`${Reminder}`);
 // const User = require("../models/User");
 const { sendEmail } = require("../utils/emailService");
 const Utility = require("../utils/Utility.js");
@@ -39,9 +39,10 @@ cron.schedule("* * * * *", async () => {
       }
 
       // Generate problem set
-      const problems = Utility.generateProblemSet();
+      const problems = await Utility.generateProblemSet();
+      console.log("🔍 Debugging problems:", problems, Array.isArray(problems));
       const emailText = `Here’s your daily problem set:\n\n${problems
-        .map((p) => `- ${p.question} (${p.difficulty})`)
+        .map((p) => `- ${p.question} (${p.options})`)
         .join("\n")}`;
 
       // Send email to the correct logged-in user
