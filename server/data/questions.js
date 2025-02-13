@@ -222,3 +222,4 @@ const mcqQuestions = [
     difficulty: "Easy",
   },
 ];
+module.exports = mcqQuestions;

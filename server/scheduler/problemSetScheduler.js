@@ -1,12 +1,12 @@
 // checking if the file exists
 const fs = require("fs");
 console.log(
-  "Checking Reminder model existence: ./models/Reminder.js",
-  fs.existsSync("./models/Reminder.js")
+  "Checking Reminder model existence: ./models/reminder.js",
+  fs.existsSync("./models/reminder.js")
 );
 console.log(
-  "Checking Reminder model existence: ../models/Reminder.js",
-  fs.existsSync("../models/Reminder.js")
+  "Checking Reminder model existence: ../models/reminder.js",
+  fs.existsSync("../models/reminder.js")
 );
 
 const cron = require("node-cron");
@@ -40,7 +40,8 @@ cron.schedule("* * * * *", async () => {
 
       // Generate problem set
       const problems = await Utility.generateProblemSet();
-      console.log("🔍 Debugging problems:", problems, Array.isArray(problems));
+      console.log("Debugging problems:", problems, Array.isArray(problems));
+      console.log("Debugging problems:", JSON.stringify(problems, null, 2));
       const emailText = `Here’s your daily problem set:\n\n${problems
         .map((p) => `- ${p.question} (${p.options})`)
         .join("\n")}`;
