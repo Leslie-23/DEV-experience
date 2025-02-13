@@ -1,9 +1,33 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import {
+  Home,
+  Clock,
+  ClipboardList,
+  FileText,
+  Folder,
+  User,
+  Settings,
+  Languages,
+} from "lucide-react";
+
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [userLanguages, setUserLanguages] = useState([]);
   const hasFetched = useRef(false);
+  const [streak, setStreak] = useState(0);
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    if (!userId) return;
+
+    fetch(`http://localhost:5000/api/submission/streak/${userId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.streakCount !== undefined) setStreak(data.streakCount);
+      })
+      .catch((err) => console.error("Error fetching streak:", err));
+  }, [userId]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -53,7 +77,7 @@ const Dashboard = () => {
         } md:translate-x-0`}
       >
         <div className="flex justify-between items-center p-4">
-          <h2 className="text-2xl font-semibold text-gray-800">Dashboard</h2>
+          <h2 className="text-2xl font-semibold text-green-500">Dashboard</h2>
           <button onClick={closeSidebar} className="text-gray-600 md:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -75,57 +99,103 @@ const Dashboard = () => {
           <ul>
             <li>
               <a
-                href="#"
-                className="block py-2 px-4 text-gray-800 hover:bg-indigo-600 hover:text-white transition duration-200"
+                href="/"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
               >
+                {" "}
+                <Home
+                  size={18}
+                  className="text-green-600 group-hover:text-white transition duration-200"
+                />
                 Home
               </a>
             </li>
             <li>
               <a
                 href="/set-reminder"
-                className="block py-2 px-4 text-gray-800 hover:bg-indigo-600 hover:text-white transition duration-200"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
               >
+                {" "}
+                <Clock
+                  size={18}
+                  className="text-green-600 group-hover:text-white transition duration-200"
+                />
                 Set Daily Timer
               </a>
             </li>
             <li>
               <a
-                href="/submissions"
-                className="block py-2 px-4 text-gray-800 hover:bg-indigo-600 hover:text-white transition duration-200"
+                href="/submissions1"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
               >
+                {" "}
+                <ClipboardList
+                  size={18}
+                  className="text-green-600 group-hover:text-white transition duration-200"
+                />
                 Submissions
               </a>
             </li>
             <li>
               <a
-                href="#"
-                className="block py-2 px-4 text-gray-800 hover:bg-indigo-600 hover:text-white transition duration-200"
+                href="/submissions"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
               >
+                {" "}
+                <FileText
+                  size={18}
+                  className="text-green-600 group-hover:text-white transition duration-200"
+                />
+                Code Review
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
+              >
+                {" "}
+                <Folder
+                  size={18}
+                  className="text-green-600 group-hover:text-white transition duration-200"
+                />
                 Projects
               </a>
             </li>
             <li>
               <a
                 href="/profile"
-                className="block py-2 px-4 text-gray-800 hover:bg-indigo-600 hover:text-white transition duration-200"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
               >
+                <User
+                  size={18}
+                  className="text-green-600 group-hover:text-white transition duration-200"
+                />
                 Profile
               </a>
             </li>
             <li>
               <a
                 href="/languages"
-                className="block py-2 px-4 text-gray-800 hover:bg-indigo-600 hover:text-white transition duration-200"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
               >
+                {" "}
+                <Languages
+                  size={18}
+                  className="text-green-600 group-hover:text-white transition duration-200"
+                />
                 Languages
               </a>
             </li>
             <li>
               <a
                 href="/settings"
-                className="block py-2 px-4 text-gray-800 hover:bg-indigo-600 hover:text-white transition duration-200"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
               >
+                <Settings
+                  size={18}
+                  className="text-green-600 group-hover:text-white transition duration-200"
+                />
                 Settings
               </a>
             </li>
@@ -136,7 +206,7 @@ const Dashboard = () => {
       {/* Main content */}
       <div className="flex-1 flex flex-col ml-0 md:ml-64 transition-all duration-300">
         {/* Navbar */}
-        <header className="bg-indigo-600 text-white p-4 fixed w-full top-0 left-0 z-10 shadow-md">
+        <header className="bg-green-500 text-white p-4 fixed w-full top-0 left-0 z-10 shadow-md">
           <div className="flex items-center justify-between">
             <button onClick={toggleSidebar} className="md:hidden text-white">
               <svg
@@ -154,10 +224,19 @@ const Dashboard = () => {
                 />
               </svg>
             </button>
-            <h1 className="text-xl font-semibold">Developer Dashboard</h1>
+            <h1 className="text-3xl font-extrabold text-green-500">DX</h1>
             <div className="flex items-center space-x-4">
               <button className="text-white">Notifications</button>
-              <button className="text-white">Profile</button>
+              <button className="text-white">
+                <a href="/profile">Profile</a>
+              </button>
+              <button className="text-white">
+                {" "}
+                {/* <p className="mt-4 text-lg font-semibold"> */}
+                Streak:{" "}
+                <span className="text-white font-bold">{streak} days</span>
+                {/* </p> */}
+              </button>
             </div>
           </div>
         </header>
@@ -213,7 +292,7 @@ const Dashboard = () => {
             </div>
 
             {/* Languages Card */}
-            <div className="mt-6 bg-white p-6 rounded-lg shadow-lg">
+            <div className="mt-6 bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-200">
               <h3 className="text-xl font-semibold text-gray-800">
                 Your Preferred Languages
               </h3>

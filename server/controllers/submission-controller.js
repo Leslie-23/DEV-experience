@@ -2,6 +2,7 @@ const Submission = require("../models/submissions");
 const Question = require("../models/questions");
 const { checkAnswer } = require("../services/aiServices");
 const Reminder = require("../models/reminder");
+const { updateUserStreak } = require("./user-streak-controller");
 
 const submitAnswer = async (req, res) => {
   try {
@@ -9,7 +10,7 @@ const submitAnswer = async (req, res) => {
     if (!userId || !answers || Object.keys(answers).length === 0) {
       return res.status(400).json({ error: "Missing data" });
     }
-
+    const streakCount = await updateUserStreak(userId);
     // Fetch questions based on the provided question IDs
     const questionIds = Object.keys(answers);
     const questions = await Question.find({ _id: { $in: questionIds } });

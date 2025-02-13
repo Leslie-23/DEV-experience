@@ -8,6 +8,7 @@ const userRoutes = require("./routes/user-routes");
 const userAdminRoutes = require("./routes/user-routes");
 const userReminderRoutes = require("./routes/reminder-routes");
 const submissionRoutes = require("./routes/submission-routes");
+const userStreakRoutes = require("./routes/user-streak-routes");
 
 // clerk stuff. for passing the tokens
 const { ClerkExpressWithAuth } = require("@clerk/clerk-sdk-node");
@@ -43,6 +44,7 @@ app.use("/api/user", userReminderRoutes);
 
 // Submission routes
 app.use("/api/submission", submissionRoutes);
+app.use("/api/submission", userStreakRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
