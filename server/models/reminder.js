@@ -7,6 +7,7 @@ const ReminderSchema = new mongoose.Schema({
     required: true,
     unique: true,
   }, // One reminder per user
+  questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
   reminderTime: { type: String, required: true }, // Format: HH:mm
 });
 

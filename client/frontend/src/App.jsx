@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 // import AdminPanel from "./pages/AdminPanel";
 import SetReminder from "./pages/SetReminder";
 import Submissions from "./pages/Submissions";
+import SubmissionsOne from "./pages/Submissions-1";
 import Profile from "./components/Profile";
 import Settings from "./components/Settings";
 import NotFound from "./pages/404";
@@ -37,6 +38,7 @@ function App() {
         */}
         <Route path="/set-reminder" element={<SetReminder />} />
         <Route path="/submissions" element={<Submissions />} />
+        <Route path="/submissions1" element={<SubmissionsOne />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/languages" element={<SetLanguages />} />

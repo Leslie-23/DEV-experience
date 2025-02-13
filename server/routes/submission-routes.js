@@ -2,12 +2,14 @@ const express = require("express");
 const {
   submitAnswer,
   getUserSubmissions,
+  getUserQuestions,
 } = require("../controllers/submission-controller");
 
 const router = express.Router();
 
 router.post("/submit", submitAnswer); // Ensure submitAnswer is defined
 router.get("/submissions/:userId", getUserSubmissions); // Ensure getUserSubmissions is defined
+router.get("/user-questions", getUserQuestions);
 
 module.exports = router;
 

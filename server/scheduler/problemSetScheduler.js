@@ -40,11 +40,36 @@ cron.schedule("* * * * *", async () => {
 
       // Generate problem set
       const problems = await Utility.generateProblemSet();
-      console.log("Debugging problems:", problems, Array.isArray(problems));
-      console.log("Debugging problems:", JSON.stringify(problems, null, 2));
-      const emailText = `Here’s your daily problem set:\n\n${problems
-        .map((p) => `- ${p.question} (${p.options})`)
-        .join("\n")}`;
+      // console.log("Debugging problems:", problems, Array.isArray(problems));
+      // console.log("Debugging problems:", JSON.stringify(problems, null, 2));  // fir testing purposes.
+      const emailText = `📌 Your Daily Coding Problem Set 📌\n\n${problems
+        .map(
+          (p, index) =>
+            `👉 Q${index + 1}: ${p.question}\nOptions: ${p.options.join(
+              ", "
+            )}\n`
+        )
+        .join("\n")}
+      Happy coding! 🚀`;
+
+      // emailHTML optional to send formatted docs but gmail doesnt seem to load this
+      const emailHTML = `
+      <div style="font-family: Arial, sans-serif; color: #333;">
+        <h2 style="color: #007BFF;">📌 Your Daily Coding Problem Set 📌</h2>
+        <ul>
+          ${problems
+            .map(
+              (p, index) => `
+              <li>
+                <strong>Q${index + 1}: ${p.question}</strong><br>
+                <em>Options:</em> ${p.options.join(", ")}
+              </li>`
+            )
+            .join("")}
+        </ul>
+        <p style="color: #007BFF; font-weight: bold;">Happy coding! 🚀</p>
+      </div>
+    `;
 
       // Send email to the correct logged-in user
       await sendEmail(

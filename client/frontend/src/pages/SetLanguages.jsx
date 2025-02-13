@@ -58,7 +58,7 @@ export default function SetLanguages({ userId, initialLanguages = [] }) {
     try {
       const token = localStorage.getItem("token");
 
-      console.log("Token being sent:", token); // Debugging log
+      // console.log("Token being sent:", token); // Debugging log
 
       const response = await axios.put(
         "http://localhost:5000/api/user/set-languages",

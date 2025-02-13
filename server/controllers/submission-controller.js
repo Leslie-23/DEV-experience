@@ -1,27 +1,41 @@
 const Submission = require("../models/submissions");
 const Question = require("../models/questions");
 const { checkAnswer } = require("../services/aiServices");
+const Reminder = require("../models/reminder");
 
 const submitAnswer = async (req, res) => {
-  const { userId, questionId, userAnswer } = req.body;
-
   try {
-    const question = await Question.findById(questionId);
-    if (!question) return res.status(404).json({ error: "Question not found" });
+    const { userId, answers } = req.body;
+    if (!userId || !answers || Object.keys(answers).length === 0) {
+      return res.status(400).json({ error: "Missing data" });
+    }
 
-    const { feedback, rating } = await checkAnswer(question, userAnswer);
+    // Fetch questions based on the provided question IDs
+    const questionIds = Object.keys(answers);
+    const questions = await Question.find({ _id: { $in: questionIds } });
 
-    const submission = await Submission.create({
-      user: userId,
-      question: questionId,
-      userAnswer,
-      aiFeedback: feedback,
-      rating,
+    let score = 0;
+    let feedbackList = [];
+
+    questions.forEach((q) => {
+      const userAnswer = answers[q._id];
+      const isCorrect = userAnswer === q.correctAnswer;
+
+      feedbackList.push({
+        questionId: q._id,
+        question: q.question,
+        userAnswer,
+        correctAnswer: q.correctAnswer,
+        isCorrect,
+      });
+
+      if (isCorrect) score++;
     });
 
-    res.json(submission);
+    res.json({ score, total: questions.length, feedback: feedbackList });
   } catch (error) {
-    res.status(500).json({ error: "Submission failed" });
+    console.error("❌ Error processing submission:", error);
+    res.status(500).json({ error: "Server error" });
   }
 };
 
@@ -38,4 +52,43 @@ const getUserSubmissions = async (req, res) => {
   }
 };
 
-module.exports = { submitAnswer, getUserSubmissions };
+const getUserQuestions = async (req, res) => {
+  try {
+    const userId = req.query.user;
+    if (!userId) return res.status(400).json({ error: "User ID is required" });
+
+    //  Ensure `questions` is correctly populated
+    const reminder = await Reminder.findOne({ user: userId }).populate({
+      path: "questions",
+      model: "Question", // Ensure it references the correct model
+    });
+
+    if (!reminder || !reminder.questions || reminder.questions.length === 0) {
+      return res.json([]); // Return an empty array if no questions exist
+    }
+
+    res.json(reminder.questions);
+  } catch (error) {
+    console.error(" Error fetching questions:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+module.exports = { submitAnswer, getUserSubmissions, getUserQuestions };
+
+// try {
+//   const userId = req.query.user;
+//   if (!userId) return res.status(400).json({ error: "User ID is required" });
+
+//   // Find the reminder for this user and get their questions
+//   const reminder = await Reminder.findOne({ user: userId }).populate(
+//     "questions"
+//   );
+//   if (!reminder)
+//     return res.status(404).json({ error: "No questions found for user" });
+
+//   res.json(reminder.questions);
+// } catch (error) {
+//   console.error("Error fetching questions:", error);
+//   res.status(500).json({ error: "Server error" });
+// } // this is the initial try run for the `getUserQuestion`

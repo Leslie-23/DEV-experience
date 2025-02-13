@@ -24,7 +24,7 @@ const Dashboard = () => {
           },
         }
       ); // Update with actual API route
-      console.log(response);
+      // console.log(response);
       const data = response;
       setUserLanguages(data.data.languages || []);
     } catch (error) {
