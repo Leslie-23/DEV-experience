@@ -82,7 +82,7 @@ cron.schedule("* * * * *", async () => {
       );
     }
   } catch (error) {
-    console.error("❌ Error running scheduler:", error.message);
+    console.error("❌ Error running scheduler:", error.message, error.stack);
   }
 });
 
