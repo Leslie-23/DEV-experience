@@ -72,31 +72,31 @@
 // });
 
 // module.exports = app;
+
+require("dotenv").config(); // Load environment variables
+require("./scheduler/problemSetScheduler"); // Start the cron job when server runs
+const express = require("express");
+const connectDB = require("./config/db");
+const cors = require("cors");
+
+const userRoutes = require("./routes/user-routes");
+const userAdminRoutes = require("./routes/user-routes");
+const userReminderRoutes = require("./routes/reminder-routes");
+const submissionRoutes = require("./routes/submission-routes");
+const userStreakRoutes = require("./routes/user-streak-routes");
+
+// // clerk stuff. for passing the tokens
+// const { ClerkExpressWithAuth } = require("@clerk/clerk-sdk-node");
+// const clerkAuthMiddleware = ClerkExpressWithAuth({
+//   publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
+//   secretKey: process.env.CLERK_SECRET_KEY,
+// });
+
+const app = express();
+app.use(express.json()); // To parse JSON bodies
+// app.use(ClerkExpressWithAuth());
+app.options("*", cors()); // Enable CORS for all routes. CORS is a real security risk and a B*tch to set up
 try {
-  require("dotenv").config(); // Load environment variables
-  require("./scheduler/problemSetScheduler"); // Start the cron job when server runs
-  const express = require("express");
-  const connectDB = require("./config/db");
-  const cors = require("cors");
-
-  const userRoutes = require("./routes/user-routes");
-  const userAdminRoutes = require("./routes/user-routes");
-  const userReminderRoutes = require("./routes/reminder-routes");
-  const submissionRoutes = require("./routes/submission-routes");
-  const userStreakRoutes = require("./routes/user-streak-routes");
-
-  // // clerk stuff. for passing the tokens
-  // const { ClerkExpressWithAuth } = require("@clerk/clerk-sdk-node");
-  // const clerkAuthMiddleware = ClerkExpressWithAuth({
-  //   publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
-  //   secretKey: process.env.CLERK_SECRET_KEY,
-  // });
-
-  const app = express();
-  app.use(express.json()); // To parse JSON bodies
-  // app.use(ClerkExpressWithAuth());
-  app.options("*", cors()); // Enable CORS for all routes. CORS is a real security risk and a B*tch to set up
-
   connectDB();
 
   // Use CORS middleware
@@ -154,6 +154,8 @@ try {
   module.exports = app;
 } catch (err) {
   console.error(err);
+} finally {
+  module.exports = app;
 }
 
 // require("dotenv").config();
