@@ -69,10 +69,10 @@ const SetReminder = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-green-500 to-green-700">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-semibold text-center mb-6">
-          Set Reminder
+          Set Your Daily Reminder
         </h2>
 
         {/* Error Message */}
@@ -93,7 +93,7 @@ const SetReminder = () => {
               id="time"
               value={time}
               onChange={handleTimeChange}
-              className="mt-2 p-2 w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-2 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500"
               required
             />
           </div>
@@ -101,7 +101,7 @@ const SetReminder = () => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700 transition"
+              className="w-full bg-green-600 text-white p-2 rounded-md hover:bg-green-700 transition"
               disabled={loading}
             >
               {loading ? "Setting..." : "Set Reminder"}
