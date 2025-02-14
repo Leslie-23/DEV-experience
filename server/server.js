@@ -57,7 +57,7 @@ app.use("/api/streaks", streakRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
-  res.json({ message: "API is live", status: 200 });
+  res.send({ message: "API is live", status: 200 });
 });
 
 // Health Check
