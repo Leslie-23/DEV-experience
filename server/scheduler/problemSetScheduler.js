@@ -1,5 +1,7 @@
+const path = require("path");
 const cron = require("node-cron");
-const Reminder = require("../models/reminder.js");
+// const Reminder = require("../models/reminder.js");
+const Reminder = require(path.join(__dirname, "../models/reminder.js"));
 // console.log(`${Reminder}`);
 // const User = require("../models/User");
 const { sendEmail } = require("../utils/emailService");
@@ -13,7 +15,7 @@ const Utility = require("../utils/Utility");
 // );
 // console.log(
 //   "Checking Reminder model existence: ../models/reminder.js",
-//   fs.existsSync("../models/reminder.js")
+//   fs.existsSync(path.join(__dirname, "../models/reminder.js"))
 // );
 
 // Scheduler runs every minute to check for users who need a problem set
