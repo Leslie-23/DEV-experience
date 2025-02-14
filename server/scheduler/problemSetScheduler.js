@@ -5,7 +5,7 @@ const Reminder = require(path.join(__dirname, "../models/reminder.js"));
 // console.log(`${Reminder}`);
 // const User = require("../models/User");
 const { sendEmail } = require("../utils/emailService");
-const Utility = require("../utils/Utility");
+const Utility = require(path.join(__dirname, "../utils/Utility"));
 
 // checking if the file exists
 // const fs = require("fs");
