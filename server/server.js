@@ -22,6 +22,9 @@ const app = express();
 app.use(express.json()); // Parse JSON bodies
 app.use(clerkAuthMiddleware); // FIX: Use only once
 
+// Connect DB
+connectDB();
+
 // Enable CORS
 app.use(
   cors({
@@ -29,8 +32,9 @@ app.use(
       "http://localhost:5173",
       "https://dev-experience-sj2j-kbjftg70q-leslie-23s-projects.vercel.app",
     ], // FIX: Remove trailing `/`
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["X-Total-Count"],
     credentials: true,
   })
 );

@@ -1,20 +1,20 @@
-// checking if the file exists
-const fs = require("fs");
-console.log(
-  "Checking Reminder model existence: ./models/reminder.js",
-  fs.existsSync("./models/reminder.js")
-);
-console.log(
-  "Checking Reminder model existence: ../models/reminder.js",
-  fs.existsSync("../models/reminder.js")
-);
-
 const cron = require("node-cron");
 const Reminder = require("../models/reminder.js");
 // console.log(`${Reminder}`);
 // const User = require("../models/User");
 const { sendEmail } = require("../utils/emailService");
-const Utility = require("../utils/Utility");
+const Utility = require("../utils/Utility.js");
+
+// checking if the file exists
+// const fs = require("fs");
+// console.log(
+//   "Checking Reminder model existence: ./models/reminder.js",
+//   fs.existsSync("./models/reminder.js")
+// );
+// console.log(
+//   "Checking Reminder model existence: ../models/reminder.js",
+//   fs.existsSync("../models/reminder.js")
+// );
 
 // Scheduler runs every minute to check for users who need a problem set
 cron.schedule("* * * * *", async () => {
