@@ -3,7 +3,7 @@ const Reminder = require("../models/reminder.js");
 // console.log(`${Reminder}`);
 // const User = require("../models/User");
 const { sendEmail } = require("../utils/emailService");
-const Utility = require("../utils/Utility.js");
+const Utility = require("../utils/Utility");
 
 // checking if the file exists
 // const fs = require("fs");
