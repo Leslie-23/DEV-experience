@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {
+  Moon,
+  Bell,
+  Clock,
+  Trash2,
+  LogOut,
+  ShieldCheck,
+  User,
+} from "lucide-react";
 
 const Settings = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -52,7 +61,11 @@ const Settings = () => {
 
   // Delete Account
   const handleDeleteAccount = async () => {
-    if (window.confirm("Are you sure you want to delete your account?")) {
+    if (
+      window.confirm(
+        "Are you sure you want to delete your account? This action cannot be undone."
+      )
+    ) {
       try {
         await axios.delete(`http://localhost:5000/api/user/delete/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -74,61 +87,87 @@ const Settings = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-      <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-semibold text-center dark:text-white">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-green-500 to-green-700 dark:bg-gray-900 px-6">
+      <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg">
+        <h2 className="text-3xl font-bold text-green-600 text-center">
           Settings
         </h2>
 
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        {error && <p className="text-red-500 text-center mt-2">{error}</p>}
 
         {/* Theme Toggle */}
-        <div className="mt-4">
-          <label className="flex items-center justify-between">
-            <span className="text-gray-700 dark:text-gray-300">Dark Mode</span>
-            <button
-              onClick={toggleTheme}
-              className="bg-gray-200 dark:bg-gray-600 px-4 py-2 rounded-md"
-            >
-              {theme === "light" ? "Enable" : "Disable"}
-            </button>
-          </label>
+        <div className="flex items-center justify-between mt-6 border-b pb-4">
+          <div className="flex items-center gap-3">
+            <Moon className="text-green-500" size={20} />
+            <span className="text-black ">Dark Mode</span>
+          </div>
+          <button
+            onClick={toggleTheme}
+            className="bg-green-500 px-4 py-2 rounded-md"
+          >
+            {theme === "light" ? "Enable" : "Disable"}
+          </button>
+        </div>
+
+        {/* Account & Security */}
+        <div className="flex items-center justify-between mt-4 border-b pb-4">
+          <div className="flex items-center gap-3">
+            <ShieldCheck className="text-green-500" size={20} />
+            <span className="text-black ">Account & Security</span>
+          </div>
+          <button className="text-green-600 hover:underline">Manage</button>
+        </div>
+
+        {/* Notification Settings */}
+        <div className="flex items-center justify-between mt-4 border-b pb-4">
+          <div className="flex items-center gap-3">
+            <Bell className="text-green-500" size={20} />
+            <span className="text-black">Notifications</span>
+          </div>
+          <button className="text-green-600 hover:underline">Edit</button>
         </div>
 
         {/* Update Reminder */}
-        <form onSubmit={handleReminderUpdate} className="mt-4">
-          <label className="block text-gray-700 dark:text-gray-300">
-            Update Reminder
+        <form onSubmit={handleReminderUpdate} className="mt-4 border-b pb-4">
+          <label className="flex items-center gap-3 text-black ">
+            <Clock className="text-green-500" size={20} />
+            Set Reminder Time
           </label>
           <input
             type="time"
             value={reminderTime}
             onChange={(e) => setReminderTime(e.target.value)}
-            className="w-full p-2 mt-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:text-white"
+            className="w-full p-2 mt-2 border border-gray-300 rounded-md "
           />
           <button
             type="submit"
-            className="mt-2 w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700"
+            className="mt-2 w-full bg-green-500 text-white p-2 rounded-md hover:bg-green-600"
           >
             Update Reminder
           </button>
         </form>
 
         {/* Delete Account */}
-        <button
-          onClick={handleDeleteAccount}
-          className="mt-4 w-full bg-red-600 text-white p-2 rounded-md hover:bg-red-700"
-        >
-          Delete Account
-        </button>
+        <div className="mt-4">
+          <button
+            onClick={handleDeleteAccount}
+            className="w-full bg-red-600 text-white p-2 rounded-md flex items-center justify-center gap-2 hover:bg-red-700"
+          >
+            <Trash2 size={18} />
+            Delete Account
+          </button>
+        </div>
 
         {/* Logout */}
-        <button
-          onClick={handleLogout}
-          className="mt-2 w-full bg-gray-600 text-white p-2 rounded-md hover:bg-gray-700"
-        >
-          Logout
-        </button>
+        <div className="mt-2">
+          <button
+            onClick={handleLogout}
+            className="w-full bg-gray-600 text-white p-2 rounded-md flex items-center justify-center gap-2 hover:bg-gray-700"
+          >
+            <LogOut size={18} />
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   );

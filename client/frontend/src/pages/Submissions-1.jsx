@@ -17,6 +17,7 @@ const SubmissionsOne = () => {
       .then((data) => {
         if (Array.isArray(data)) {
           setQuestions(data);
+          //   console.log(data);
         } else {
           console.error("Unexpected API response:", data);
           setQuestions([]);

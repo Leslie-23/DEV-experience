@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 // import { Provider } from "react-redux";
 // import store from "./store"; // no redux just yet
 import App from "./App";
-import "./index.css"; // Import global styles
+// import "./index.css"; // Import global styles
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

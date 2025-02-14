@@ -18,6 +18,7 @@ import Settings from "./components/Settings";
 import NotFound from "./pages/404";
 import SetLanguages from "./pages/SetLanguages";
 import "./App.css";
+import Streak from "./components/Streak";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/languages" element={<SetLanguages />} />
+        <Route path="/streak" element={<Streak />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

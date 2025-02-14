@@ -9,6 +9,8 @@ import {
   User,
   Settings,
   Languages,
+  Bell,
+  Flame,
 } from "lucide-react";
 
 const Dashboard = () => {
@@ -225,17 +227,33 @@ const Dashboard = () => {
               </svg>
             </button>
             <h1 className="text-3xl font-extrabold text-green-500">DX</h1>
-            <div className="flex items-center space-x-4">
-              <button className="text-white">Notifications</button>
-              <button className="text-white">
-                <a href="/profile">Profile</a>
-              </button>
+            <div className="flex items-center  space-x-4">
               <button className="text-white">
                 {" "}
-                {/* <p className="mt-4 text-lg font-semibold"> */}
-                Streak:{" "}
-                <span className="text-white font-bold">{streak} days</span>
-                {/* </p> */}
+                <a href="/profile">
+                  <Bell
+                    size={18}
+                    className="text-white group-hover:text-gray-900 transition duration-200"
+                  />
+                </a>
+              </button>
+              <button className="text-white">
+                <a href="/profile">
+                  <User
+                    size={18}
+                    className="text-white group-hover:text-gray-700 transition duration-200"
+                  />
+                </a>
+              </button>
+              <button className=" flex justify-center gap-2 text-white ">
+                {" "}
+                <a
+                  href="/streak"
+                  className="flex justify-center gap-2 text-white"
+                >
+                  <Flame size={18} className="text-white gap-0 p-0 m-0" />{" "}
+                  <span className="text-white font-bold">{streak} days</span>
+                </a>
               </button>
             </div>
           </div>
