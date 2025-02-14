@@ -6,5 +6,11 @@
       "src": "/(.*)",
       "dest": "/"
     }
+  ],
+  "crons": [
+    {
+      "path": "/scheduler/problemSetScheduler.js",
+      "schedule": "* * * * *"
+    }
   ]
 }
