@@ -30,7 +30,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://dev-experience-sj2j-kbjftg70q-leslie-23s-projects.vercel.app/",
-    ], // Allow only this origin
+    ], // Allow these origins (dev and prod)
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
     credentials: true, // Allow cookies and authorization headers
