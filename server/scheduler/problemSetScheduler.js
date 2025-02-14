@@ -15,7 +15,7 @@ const Utility = require(path.join(__dirname, "../utils/Utility.js"));
 // );
 // console.log(
 //   "Checking Reminder model existence: ../models/reminder.js",
-//   fs.existsSync(path.join(__dirname, "../models/reminder.js"))
+//   fs.existsSync(path.join(__dirname, "../utils/Utility.js"))
 // );
 
 // Scheduler runs every minute to check for users who need a problem set
