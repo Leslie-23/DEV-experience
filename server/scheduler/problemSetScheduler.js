@@ -5,7 +5,7 @@ const Reminder = require(path.join(__dirname, "../models/reminder.js"));
 // console.log(`${Reminder}`);
 // const User = require("../models/User");
 const { sendEmail } = require("../utils/emailService");
-const Utility = require(path.join(__dirname, "../utils/Utility.js"));
+const { Utility } = require(path.join(__dirname, "../utils/Utility.js"));
 
 // checking if the file exists
 // const fs = require("fs");
@@ -23,6 +23,7 @@ cron.schedule("* * * * *", async () => {
   console.log("⏳ Checking for users to send problem sets...");
 
   const now = new Date();
+  const date = new Date().getDate().toLocaleString();
   const currentTime = `${now.getHours().toString().padStart(2, "0")}:${now
     .getMinutes()
     .toString()
@@ -50,9 +51,7 @@ cron.schedule("* * * * *", async () => {
       const emailText = `📌 Your Daily Coding Problem Set 📌\n\n${problems
         .map(
           (p, index) =>
-            `👉 Q${index + 1}: ${p.question}\nOptions: ${p.options.join(
-              ", "
-            )}\n`
+            `👉 ${index + 1}: ${p.question}\nOptions: ${p.options.join(", ")}\n`
         )
         .join("\n")}
       Happy coding! 🚀`;
@@ -79,7 +78,7 @@ cron.schedule("* * * * *", async () => {
       // Send email to the correct logged-in user
       await sendEmail(
         reminder.user.email,
-        "Your Daily Coding Problem Set",
+        `Your Daily Coding Problem Set for ${date}`,
         emailText
       );
     }
