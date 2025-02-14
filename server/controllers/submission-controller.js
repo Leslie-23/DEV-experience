@@ -58,19 +58,41 @@ const getUserQuestions = async (req, res) => {
     const userId = req.query.user;
     if (!userId) return res.status(400).json({ error: "User ID is required" });
 
-    //  Ensure `questions` is correctly populated
-    const reminder = await Reminder.findOne({ user: userId }).populate({
-      path: "questions",
-      model: "Question", // Ensure it references the correct model
-    });
+    // Fetch the existing reminder
+    let reminder = await Reminder.findOne({ user: userId }).populate(
+      "questions"
+    );
 
-    if (!reminder || !reminder.questions || reminder.questions.length === 0) {
-      return res.json([]); // Return an empty array if no questions exist
+    // console.log("Before Update - Reminder:", reminder); // Debugging log
+
+    // Fetch new random questions
+    const newQuestions = await Question.aggregate([{ $sample: { size: 5 } }]);
+
+    if (newQuestions.length === 0) {
+      return res.status(404).json({ error: "No questions available" });
     }
 
+    // Ensure questions are replaced
+    await Reminder.findOneAndUpdate(
+      { user: userId },
+      {
+        $set: { questions: [] }, // ✅ Clear old questions first
+      }
+    );
+
+    // Now update with new questions
+    reminder = await Reminder.findOneAndUpdate(
+      { user: userId },
+      {
+        $set: { questions: newQuestions.map((q) => q._id) }, // ✅ Replace with new question IDs
+      },
+      { new: true, upsert: true }
+    ).populate("questions");
+
+    // console.log("After Update - Reminder:", reminder); // Debugging log
     res.json(reminder.questions);
   } catch (error) {
-    console.error(" Error fetching questions:", error);
+    console.error("Error fetching questions:", error);
     res.status(500).json({ error: "Server error" });
   }
 };

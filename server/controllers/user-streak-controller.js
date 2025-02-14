@@ -32,3 +32,5 @@ const updateUserStreak = async (userId) => {
 
   return streakData.streakCount;
 };
+
+module.exports = { updateUserStreak };

@@ -40,6 +40,9 @@ cron.schedule("* * * * *", async () => {
 
       // Generate problem set
       const problems = await Utility.generateProblemSet();
+      const problemsSync = reminder.questions;
+      // console.log("📩 Sending the same questions:", problems);
+
       // console.log("Debugging problems:", problems, Array.isArray(problems));
       // console.log("Debugging problems:", JSON.stringify(problems, null, 2));  // fir testing purposes.
       const emailText = `📌 Your Daily Coding Problem Set 📌\n\n${problems
