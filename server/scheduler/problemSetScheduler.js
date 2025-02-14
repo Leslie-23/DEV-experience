@@ -14,7 +14,7 @@ const Reminder = require("../models/reminder.js");
 // console.log(`${Reminder}`);
 // const User = require("../models/User");
 const { sendEmail } = require("../utils/emailService");
-const Utility = require("../utils/Utility.js");
+const Utility = require("../utils/Utility");
 
 // Scheduler runs every minute to check for users who need a problem set
 cron.schedule("* * * * *", async () => {
@@ -82,7 +82,7 @@ cron.schedule("* * * * *", async () => {
       );
     }
   } catch (error) {
-    console.error("❌ Error running scheduler:", error.message, error.stack);
+    console.error("❌ Error running scheduler:", error.message);
   }
 });
 
