@@ -1,78 +1,3 @@
-// require("dotenv").config(); // Load environment variables
-// require("./scheduler/problemSetScheduler"); // Start the cron job when server runs
-// const express = require("express");
-// const connectDB = require("./config/db");
-// const cors = require("cors");
-
-// // Import Routes
-// const userRoutes = require("./routes/user-routes");
-// const adminRoutes = require("./routes/admin-routes"); // FIX: Corrected admin route
-// const reminderRoutes = require("./routes/reminder-routes");
-// const submissionRoutes = require("./routes/submission-routes");
-// const streakRoutes = require("./routes/user-streak-routes");
-
-// // Clerk authentication middleware
-// // const { ClerkExpressWithAuth } = require("@clerk/clerk-sdk-node");
-// // const clerkAuthMiddleware = ClerkExpressWithAuth({
-// //   publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
-// //   secretKey: process.env.CLERK_SECRET_KEY,
-// // });
-
-// const app = express();
-// app.use(express.json()); // Parse JSON bodies
-// // app.use(clerkAuthMiddleware); // FIX: Use only once but causing too many issues
-
-// // Connect DB
-// connectDB();
-
-// // Enable CORS
-// app.use(
-//   cors({
-//     origin: [
-//       "http://localhost:5173",
-//       "https://dev-experience-sj2j-kbjftg70q-leslie-23s-projects.vercel.app",
-//     ], // FIX: Remove trailing `/`
-//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//     exposedHeaders: ["X-Total-Count"],
-//     credentials: true,
-//   })
-// );
-
-// // 🛠 FIX: Logging Middleware (should be above routes)
-// app.use((req, res, next) => {
-//   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
-//   next();
-// });
-
-// // Fix /favicon.ico request error
-// app.get("/favicon.ico", (req, res) => res.status(204).end());
-
-// // 🛠 FIX: Correct route definitions (avoid overwriting routes)
-// app.use("/api/user", userRoutes);
-// app.use("/api/admin", adminRoutes);
-// app.use("/api/reminders", reminderRoutes);
-// app.use("/api/submissions", submissionRoutes);
-// app.use("/api/streaks", streakRoutes);
-
-// // Home Route
-// app.get("/", (req, res) => {
-//   res.send({ message: "API is live", status: 200 });
-// });
-
-// // Health Check
-// app.get("/test", (req, res) => {
-//   res.send("--test \n API is live.");
-// });
-
-// // Start Server
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
-
-// module.exports = app;
-
 require("dotenv").config(); // Load environment variables
 require("./scheduler/problemSetScheduler"); // Start the cron job when server runs
 const express = require("express");
@@ -126,8 +51,10 @@ try {
   app.use("/api/submission", submissionRoutes);
   app.use("/api/submission", userStreakRoutes);
 
+  // Project routes
   app.use("/api/projects", projectRoutes);
 
+  // snippet and comments routes
   app.use("/api/snippets", snippetRoutes);
 
   // Home Route
@@ -135,13 +62,15 @@ try {
     const data = {
       message: "API is live",
       status: 200,
-      // data: "Welcome to the API!",
-      // timestamp: new Date(),
+      app_name: "CampusBite API",
+      version: "1.0.0",
+      environment: process.env.NODE_ENV || "development",
+      uptime: process.uptime().toFixed(2) + " seconds",
+      server_time: new Date().toISOString(),
+      client_ip: req.ip,
+      deployed_on: "Render || Vercel",
     };
     res.json(data);
-
-    // res.send("API is running... yippy");
-    // res.sendFile(path.join(__dirname, "client", "frontend", "index.html")); // to better handle API landing page
   });
 
   app.use((req, res, next) => {
@@ -163,65 +92,3 @@ try {
 } finally {
   module.exports = app;
 }
-
-// require("dotenv").config();
-// require("./scheduler/problemSetScheduler"); // Start scheduled jobs
-// const express = require("express");
-// const connectDB = require("./config/db");
-// const cors = require("cors");
-
-// const userRoutes = require("./routes/user-routes");
-// const adminRoutes = require("./routes/admin-routes");
-// const reminderRoutes = require("./routes/reminder-routes");
-// const submissionRoutes = require("./routes/submission-routes");
-// const streakRoutes = require("./routes/user-streak-routes");
-
-// const app = express();
-// app.use(express.json());
-
-// // CORS Configuration
-// app.use(
-//   cors({
-//     origin: [
-//       "http://localhost:5173",
-//       "https://dev-experience-sj2j-kbjftg70q-leslie-23s-projects.vercel.app",
-//     ],
-//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//     credentials: true,
-//   })
-// );
-
-// connectDB();
-
-// // Fix favicon error on Vercel
-// app.get("/favicon.ico", (req, res) => res.status(204).end());
-
-// // ✅ Fix API Route Assignments
-// app.use("/api/user", userRoutes);
-// app.use("/api/admin", adminRoutes);
-// app.use("/api/reminders", reminderRoutes);
-// app.use("/api/submissions", submissionRoutes);
-// app.use("/api/streaks", streakRoutes);
-
-// // Logging Middleware
-// app.use((req, res, next) => {
-//   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
-//   next();
-// });
-
-// // Health Check Routes
-// app.get("/", (req, res) => {
-//   res.json({ message: "API is live", status: 200 });
-// });
-// app.get("/test", (req, res) => {
-//   res.send("--test \n API is live.");
-// });
-
-// // Start Server
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => {
-//   console.log(`🚀 Server running on port ${PORT}`);
-// });
-
-// module.exports = app;
