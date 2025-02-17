@@ -28,14 +28,13 @@ const Dashboard = () => {
     if (!userId) return;
 
     axios
-      .get(`{API_URL}/api/submission/streak/${userId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.streakCount !== undefined) setStreak(data.streakCount);
+      .get(`${API_URL}/api/submission/streak/${userId}`)
+      .then((res) => {
+        if (res.data.streakCount !== undefined) setStreak(res.data.streakCount);
       })
       .catch((err) => console.error("Error fetching streak:", err));
   }, [userId]);
-
+  console.log(`${API_URL}/api/submission/streak/${userId}`);
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
