@@ -34,7 +34,7 @@ const Dashboard = () => {
       })
       .catch((err) => console.error("Error fetching streak:", err));
   }, [userId]);
-  console.log(`${API_URL}/api/submission/streak/${userId}`);
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -65,9 +65,12 @@ const Dashboard = () => {
     }
   }, []);
   const handleLogout = () => {
+    localStorage.clear();
     localStorage.removeItem("userId");
+    alert("Logged out successfully.");
     window.location.href = "/login";
   };
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
@@ -254,7 +257,7 @@ const Dashboard = () => {
                 </a>
               </button>
               <button className="text-white" onClick={handleLogout}>
-                <a href="#">
+                <a href="/">
                   <LogOut
                     size={18}
                     className="text-white group-hover:text-gray-700 transition duration-200"
