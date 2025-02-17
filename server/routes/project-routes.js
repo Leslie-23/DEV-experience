@@ -1,18 +1,10 @@
 const express = require("express");
-const {
-  getSnippets,
-  createSnippet,
-  addComment,
-  deleteComment,
-  hideComment,
-} = require("../controllers/snippet-controller");
-
 const router = express.Router();
+const projectController = require("../controllers/project-controller");
 
-router.get("/", getSnippets);
-router.post("/", createSnippet);
-router.post("/:id/comments", addComment);
-router.delete("/:snippetId/comments/:commentId", deleteComment);
-router.put("/:snippetId/comments/:commentId/hide", hideComment);
+router.get("/", projectController.getProjects);
+router.post("/", projectController.createProject);
+router.put("/:id", projectController.updateProject);
+router.delete("/:id", projectController.deleteProject);
 
 module.exports = router;

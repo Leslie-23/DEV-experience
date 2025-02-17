@@ -20,7 +20,8 @@ const Projects = () => {
     try {
       setLoading(true);
       const res = await axios.get(API_URL);
-      setProjects(res.data);
+      // console.log("Projects Response:", res.data);
+      setProjects(res.data || []);
     } catch (error) {
       console.error("Error fetching projects:", error);
     } finally {
@@ -75,7 +76,7 @@ const Projects = () => {
           <h1 className="text-3xl font-bold text-white ">My Projects</h1>
           <button
             onClick={() => openModal()}
-            className="flex items-center bg-white text-green-500 px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition"
+            className="flex items-center bg-white text-green-500 px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition hover:text-white transition"
           >
             <Plus size={20} className="mr-2" /> Add Project
           </button>
@@ -134,6 +135,7 @@ const Projects = () => {
                     <Clock size={16} className="mr-1" /> Project Timeline
                   </h3>
                   <ul className="mt-2 text-gray-600 text-sm space-y-1">
+                    {/* {Array.isArray(project.timeline) && */}
                     {project.timeline.map((entry, index) => (
                       <li key={index} className="flex items-start">
                         <span className="mr-2 text-green-500">●</span>
