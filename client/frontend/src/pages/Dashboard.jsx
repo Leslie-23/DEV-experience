@@ -109,7 +109,7 @@ const Dashboard = () => {
             <li>
               <a
                 href="/"
-                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200 group"
               >
                 {" "}
                 <Home
@@ -122,7 +122,7 @@ const Dashboard = () => {
             <li>
               <a
                 href="/set-reminder"
-                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200 group"
               >
                 {" "}
                 <Clock
@@ -135,7 +135,7 @@ const Dashboard = () => {
             <li>
               <a
                 href="/submissions1"
-                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200 group"
               >
                 {" "}
                 <ClipboardList
@@ -148,7 +148,7 @@ const Dashboard = () => {
             <li>
               <a
                 href="/submissions"
-                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200 group"
               >
                 {" "}
                 <FileText
@@ -161,7 +161,7 @@ const Dashboard = () => {
             <li>
               <a
                 href="/projects"
-                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200 group"
               >
                 {" "}
                 <Folder
@@ -174,7 +174,7 @@ const Dashboard = () => {
             <li>
               <a
                 href="/profile"
-                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200 group"
               >
                 <User
                   size={18}
@@ -186,7 +186,7 @@ const Dashboard = () => {
             <li>
               <a
                 href="/languages"
-                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200 group"
               >
                 {" "}
                 <Languages
@@ -199,7 +199,7 @@ const Dashboard = () => {
             <li>
               <a
                 href="/settings"
-                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
+                className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200 group"
               >
                 <Settings
                   size={18}

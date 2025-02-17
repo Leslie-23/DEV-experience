@@ -41,7 +41,7 @@ const Submissions = () => {
     try {
       const res = await axios.get(`${API_URL}/api/snippets`);
       setSnippets(res.data);
-      console.log(res.data.user);
+      console.log(res.data);
     } catch (error) {
       console.error("Error fetching snippets:", error);
     }
@@ -51,7 +51,7 @@ const Submissions = () => {
   const handleSubmit = async () => {
     if (!code.trim() || !userId) return;
     try {
-      const response = await axios.post(API_URL, {
+      const response = await axios.post(`${API_URL}/api/snippets`, {
         user: userId, // Send as string, backend should convert it properly
         code,
         language: "javascript", // Ensure language field is sent if required
