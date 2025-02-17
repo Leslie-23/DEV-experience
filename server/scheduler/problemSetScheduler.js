@@ -91,7 +91,7 @@ cron.schedule("* * * * *", async () => {
 
 // const cron = require("node-cron");
 // const User = require("../models/User");
-// const Utility = require("../utils/Utility");
+// const Utility = require("../utils/utility");
 
 // //  Runs every minute and checks if a user should receive problems
 // cron.schedule("* * * * *", async () => {

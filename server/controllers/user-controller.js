@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Admin = require("../models/Admin");
+const Utility = require("../utils/utility");
 const bcrypt = require("bcryptjs");
 
 // Environment Variable for Admin Signup Authorization
@@ -125,8 +126,6 @@ exports.viewUser = async (req, res) => {
 };
 
 //
-// const User = require("../models/User");
-const Utility = require("../utils/Utility");
 
 // Set the reminder time for the logged-in user
 exports.setReminderTime = async (req, res) => {
