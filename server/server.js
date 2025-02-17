@@ -62,7 +62,7 @@ try {
     const data = {
       message: "API is live",
       status: 200,
-      app_name: "CampusBite API",
+      app_name: "Dev-experience API",
       version: "1.0.0",
       environment: process.env.NODE_ENV || "development",
       uptime: process.uptime().toFixed(2) + " seconds",

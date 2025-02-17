@@ -6,7 +6,7 @@ import { useLoading } from "../context/LoadingContext";
 
 const Login = () => {
   const API_URL = import.meta.env.VITE_BASE_URL;
-  console.log(API_URL);
+  // console.log(API_URL);
   // console.log(import.meta.env);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
