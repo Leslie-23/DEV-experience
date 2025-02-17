@@ -129,3 +129,81 @@
 
 // Run the script
 // seedReminders();
+
+// const mongoose = require("mongoose");
+// const Snippet = require("../models/snippet"); // Import your Snippet model
+
+// const MONGO_URI =
+//   ""; // Replace with your MongoDB URI
+// const NEW_USER_ID = "679b5d14095baba36c00725b"; // Replace with the correct user ID
+
+// const updateSnippetsWithUser = async () => {
+//   try {
+//     // Connect to MongoDB
+//     await mongoose.connect(MONGO_URI, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//       serverSelectionTimeoutMS: 10000,
+//     });
+
+//     console.log("✅ Connected to MongoDB");
+
+//     // Update all snippets where user is null
+//     const result = await Snippet.updateMany(
+//       { user: null }, // Find all snippets with missing users
+//       { $set: { user: new mongoose.Types.ObjectId(NEW_USER_ID) } } // Assign a valid user ID
+//     );
+
+//     console.log(
+//       `✅ Updated ${result.modifiedCount} snippets with user ID: ${NEW_USER_ID}`
+//     );
+//   } catch (error) {
+//     console.error("❌ Error updating snippets:", error);
+//   } finally {
+//     // Disconnect from MongoDB
+//     await mongoose.disconnect();
+//     console.log("🔌 Disconnected from MongoDB");
+//   }
+// };
+
+// // Run the function
+// updateSnippetsWithUser();
+
+// const mongoose = require("mongoose");
+// const Snippet = require("../models/snippet"); // Import Snippet model
+
+// const MONGO_URI =
+//   ""; // Replace with your actual MongoDB URI
+// const NEW_USER_ID = "65af1234b5d6a7c890654324"; // Replace with a valid user ID
+
+// const updateSnippetsWithUser = async () => {
+//   try {
+//     // Connect to MongoDB
+//     await mongoose.connect(MONGO_URI, {
+//       //   useNewUrlParser: true,
+//       //   useUnifiedTopology: true,
+//       //   serverSelectionTimeoutMS: 10000,
+//     });
+
+//     console.log("✅ Connected to MongoDB");
+
+//     // Fix: Ensure `user` is truly null or missing
+//     const result = await Snippet.updateMany(
+//       { $or: [{ user: null }, { user: { $exists: false } }] }, // Find all snippets missing a user
+//       { $set: { user: new mongoose.Types.ObjectId(NEW_USER_ID) } } // Assign valid user
+//     );
+
+//     console.log(
+//       `✅ Updated ${result.modifiedCount} snippets with user ID: ${NEW_USER_ID}`
+//     );
+//   } catch (error) {
+//     console.error("❌ Error updating snippets:", error);
+//   } finally {
+//     // Disconnect from MongoDB
+//     await mongoose.disconnect();
+//     console.log("🔌 Disconnected from MongoDB");
+//   }
+// };
+
+// // Run the function
+// updateSnippetsWithUser();

@@ -12,7 +12,7 @@ class Utility {
   }
 }
 
-module.exports = Utility;
+module.exports = { Utility };
 
 // scrapped due to scalability
 

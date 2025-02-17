@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@uiw/react-codemirror": "^4.23.8",
+    "axios": "^1.7.9"
+  }
+}

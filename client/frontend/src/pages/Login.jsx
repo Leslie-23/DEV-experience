@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useLoading } from "../context/LoadingContext";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const { setIsLoadingAnimator } = useLoading();
   const navigate = useNavigate();
 
   // Handle email and password change
@@ -21,6 +23,7 @@ const Login = () => {
     setIsLoading(true);
 
     try {
+      setIsLoadingAnimator(true);
       // Send POST request to your API for authentication
       const response = await axios.post(
         "http://localhost:5000/api/user/login",
@@ -45,6 +48,7 @@ const Login = () => {
       console.error(err);
     } finally {
       setIsLoading(false);
+      setIsLoadingAnimator(false);
     }
   };
 
@@ -102,7 +106,14 @@ const Login = () => {
                 className="w-full bg-green-500 text-white p-2 rounded-md hover:bg-green-700 transition"
                 disabled={isLoading}
               >
-                {isLoading ? "Logging in..." : "Login"}
+                {isLoading ? (
+                  <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+                    {/* Login */}
+                    <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                ) : (
+                  "Login"
+                )}
               </button>
             </div>
           </form>

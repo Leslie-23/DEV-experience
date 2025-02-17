@@ -11,7 +11,10 @@ import {
   Languages,
   Bell,
   Flame,
+  LogOut,
 } from "lucide-react";
+import { useLoading } from "../context/LoadingContext";
+import bgImg from "../../public/DevX-bg.png";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -63,7 +66,10 @@ const Dashboard = () => {
       hasFetched.current = true; // Mark as executed
     }
   }, []);
-
+  const handleLogout = () => {
+    localStorage.removeItem("userId");
+    window.location.href = "/";
+  };
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
@@ -153,7 +159,7 @@ const Dashboard = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/profile"
                 className="flex items-center gap-3 py-2 px-4 text-gray-800 hover:bg-green-500 hover:text-white transition duration-200"
               >
                 {" "}
@@ -206,7 +212,11 @@ const Dashboard = () => {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col ml-0 md:ml-64 transition-all duration-300">
+      <div
+        className="flex-1 flex flex-col ml-0 md:ml-64 transition-all duration-300 w-full  "
+        // style={{ backgroundImage: `url(${bgImg})` }}
+      >
+        {/* <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>{" "} */}
         {/* Navbar */}
         <header className="bg-green-500 text-white p-4 fixed w-full top-0 left-0 z-10 shadow-md">
           <div className="flex items-center justify-between">
@@ -245,6 +255,14 @@ const Dashboard = () => {
                   />
                 </a>
               </button>
+              <button className="text-white" onClick={handleLogout}>
+                <a href="#">
+                  <LogOut
+                    size={18}
+                    className="text-white group-hover:text-gray-700 transition duration-200"
+                  />
+                </a>
+              </button>
               <button className=" flex justify-center gap-2 text-white ">
                 {" "}
                 <a
@@ -258,7 +276,6 @@ const Dashboard = () => {
             </div>
           </div>
         </header>
-
         {/* Main Dashboard Section */}
         <main className="flex-grow p-6 pt-20">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -294,7 +311,7 @@ const Dashboard = () => {
                 Manage your coding projects, track progress, and collaborate.
               </p>
               <button className="mt-4 text-indigo-600 hover:text-indigo-700">
-                View Projects
+                <a href="/projects"> View Projects</a>
               </button>
             </div>
 

@@ -11,6 +11,7 @@ const Signup = () => {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,6 +21,7 @@ const Signup = () => {
     e.preventDefault();
     setError("");
     setSuccess("");
+    setIsLoading(true);
 
     const { name, email, password, confirmPassword, phone } = formData;
 
@@ -133,6 +135,15 @@ const Signup = () => {
             type="submit"
             className="w-full bg-green-500 text-white p-3 rounded-lg font-semibold hover:bg-green-600 transition"
           >
+            {/* {isLoading ? (
+              <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+                <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin">
+                   Sign Up 
+                </div>
+              </div>
+            ) : (
+              "Sign Up"
+            )} */}
             Sign Up
           </button>
         </form>

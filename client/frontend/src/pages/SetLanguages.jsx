@@ -182,7 +182,9 @@ export default function SetLanguages({ userId, initialLanguages = [] }) {
           className="w-full bg-green-500 text-white px-4 py-2 rounded-md mt-6 hover:bg-green-600 transition disabled:opacity-50 flex items-center justify-center gap-2"
         >
           {loading ? (
-            "Saving..."
+            <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+              <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+            </div>
           ) : (
             <>
               <Check size={18} /> Save & Continue
