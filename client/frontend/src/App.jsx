@@ -1,5 +1,6 @@
 // app.jsx
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -21,13 +22,13 @@ import "./App.css";
 function App() {
   return (
     <>
-      {" "}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        {/* 
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          {/* 
         <Route path="/profile" element={<Profile />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:id" element={<ProjectDetails />} />
@@ -35,16 +36,17 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/admin" element={<AdminPanel />} /> 
         */}
-        <Route path="/set-reminder" element={<SetReminder />} />
-        <Route path="/submissions" element={<Submissions />} />
-        <Route path="/submissions1" element={<SubmissionsOne />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/languages" element={<SetLanguages />} />
-        <Route path="/streak" element={<Streak />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="/set-reminder" element={<SetReminder />} />
+          <Route path="/submissions" element={<Submissions />} />
+          <Route path="/submissions1" element={<SubmissionsOne />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/languages" element={<SetLanguages />} />
+          <Route path="/streak" element={<Streak />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
     </>
   );
 }
