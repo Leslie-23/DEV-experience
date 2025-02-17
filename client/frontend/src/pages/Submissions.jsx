@@ -15,9 +15,7 @@ import { defaultKeymap } from "@codemirror/commands";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { Plus, MessageSquare, Brain } from "lucide-react";
 
-const API_URL = "http://localhost:5000/api/snippets";
-const AI_API_URL = "http://localhost:5000/api/ai-suggestions";
-
+const API_URL = import.meta.env.VITE_BASE_URL;
 const Submissions = () => {
   const [userId, setUserId] = useState(null);
   const [snippets, setSnippets] = useState([]);
@@ -41,7 +39,7 @@ const Submissions = () => {
   const fetchSnippets = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(API_URL);
+      const res = await axios.get(`${API_URL}/api/snippets`);
       setSnippets(res.data);
       console.log(res.data.user);
     } catch (error) {
@@ -71,7 +69,9 @@ const Submissions = () => {
   const getAISuggestions = async () => {
     try {
       setLoading(true);
-      const response = await axios.post(AI_API_URL, { code });
+      const response = await axios.post(`${API_URL}/api/ai-suggestions`, {
+        code,
+      });
       setAiSuggestions(response.data.suggestions);
     } catch (error) {
       console.error("Error fetching AI suggestions:", error);

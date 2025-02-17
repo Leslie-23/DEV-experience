@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SetReminder = () => {
-  // State for time reminder
+  const API_URL = import.meta.env.VITE_BASE_URL;
   const [time, setTime] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ const SetReminder = () => {
 
         // Send POST request to backend with time data
         const response = await axios.post(
-          "http://localhost:5000/api/user/set-reminder",
+          `${API_URL}/api/user/set-reminder`,
           { reminderTime: time },
           {
             headers: {

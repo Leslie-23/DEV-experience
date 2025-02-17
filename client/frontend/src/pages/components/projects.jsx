@@ -5,6 +5,8 @@ import { Plus, Edit, Trash2, Clock } from "lucide-react";
 const API_URL = "http://localhost:5000/api/projects";
 
 const Projects = () => {
+  const API_URL = import.meta.env.VITE_BASE_URL;
+
   const [projects, setProjects] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
@@ -19,7 +21,7 @@ const Projects = () => {
   const fetchProjects = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(API_URL);
+      const res = await axios.get(`${API_URL}/api/projects`);
       // console.log("Projects Response:", res.data);
       setProjects(res.data || []);
     } catch (error) {
@@ -45,9 +47,9 @@ const Projects = () => {
   const saveProject = async () => {
     try {
       if (editingProject) {
-        await axios.put(`${API_URL}/${editingProject._id}`, form);
+        await axios.put(`${API_URL}/api/projects/${editingProject._id}`, form);
       } else {
-        await axios.post(API_URL, form);
+        await axios.post(`${API_URL}/projects`, form);
       }
       setModalOpen(false);
       fetchProjects(); // Refresh project list
@@ -60,7 +62,7 @@ const Projects = () => {
   const deleteProject = async (id) => {
     if (confirm("Are you sure you want to delete this project?")) {
       try {
-        await axios.delete(`${API_URL}/${id}`);
+        await axios.delete(`${API_URL}/api/projects/${id}`);
         fetchProjects(); // Refresh list after deletion
       } catch (error) {
         console.error("Error deleting project:", error);

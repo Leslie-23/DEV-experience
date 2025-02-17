@@ -17,6 +17,7 @@ import { useLoading } from "../context/LoadingContext";
 import bgImg from "../../public/DevX-bg.png";
 
 const Dashboard = () => {
+  const API_URL = import.meta.env.VITE_BASE_URL;
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [userLanguages, setUserLanguages] = useState([]);
   const hasFetched = useRef(false);
@@ -26,7 +27,8 @@ const Dashboard = () => {
   useEffect(() => {
     if (!userId) return;
 
-    fetch(`http://localhost:5000/api/submission/streak/${userId}`)
+    axios
+      .get(`{API_URL}/api/submission/streak/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.streakCount !== undefined) setStreak(data.streakCount);
@@ -45,14 +47,11 @@ const Dashboard = () => {
   // Function to fetch selected languages
   const fetchUserLanguages = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/user/get-languages",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      ); // Update with actual API route
+      const response = await axios.get(`${API_URL}/api/user/get-languages`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }); // Update with actual API route
       // console.log(response);
       const data = response;
       setUserLanguages(data.data.languages || []);
@@ -68,7 +67,7 @@ const Dashboard = () => {
   }, []);
   const handleLogout = () => {
     localStorage.removeItem("userId");
-    window.location.href = "/";
+    window.location.href = "/login";
   };
   return (
     <div className="flex min-h-screen bg-gray-100">

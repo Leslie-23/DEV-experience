@@ -3,6 +3,7 @@ import axios from "axios";
 import { User, Mail, Phone, Languages, LogOut, Edit } from "lucide-react";
 
 const Profile = () => {
+  const API_URL = import.meta.env.VITE_BASE_URL;
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -11,9 +12,7 @@ const Profile = () => {
     const fetchUser = async () => {
       try {
         const userId = localStorage.getItem("userId");
-        const response = await axios.get(
-          `http://localhost:5000/api/user/view/${userId}`
-        );
+        const response = await axios.get(`${API_URL}/api/user/view/${userId}`);
         setUser(response.data.user);
       } catch (err) {
         setError("Failed to load user details.");

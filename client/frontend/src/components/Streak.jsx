@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-
+import axios from "axios";
 const Streak = () => {
+  const API_URL = import.meta.env.VITE_BASE_URL;
   const [streak, setStreak] = useState(0);
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     if (!userId) return;
 
-    fetch(`http://localhost:5000/api/submission/streak/${userId}`)
+    axios
+      .get(`${API_URL}/api/submission/streak/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.streakCount !== undefined) setStreak(data.streakCount);

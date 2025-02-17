@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useLoading } from "../context/LoadingContext";
 
 const Login = () => {
+  const API_URL = import.meta.env.VITE_BASE_URL;
+  console.log(API_URL);
+  // console.log(import.meta.env);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -25,13 +28,10 @@ const Login = () => {
     try {
       setIsLoadingAnimator(true);
       // Send POST request to your API for authentication
-      const response = await axios.post(
-        "http://localhost:5000/api/user/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post(`${API_URL}/api/user/login`, {
+        email,
+        password,
+      });
 
       // Check if the login was successful
       if (response.status === 200) {

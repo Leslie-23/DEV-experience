@@ -47,6 +47,7 @@ const smallText = ` Web & Frontend: JavaScript, TypeScript, PHP
  Mobile: Swift (iOS), Kotlin (Android), Dart (Flutter)
  Legacy & Niche: Objective-C, Pascal, Fortran, Shell, Perl`;
 export default function SetLanguages({ userId, initialLanguages = [] }) {
+  const API_URL = import.meta.env.VITE_BASE_URL;
   const [selectedLanguages, setSelectedLanguages] = useState(initialLanguages);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();

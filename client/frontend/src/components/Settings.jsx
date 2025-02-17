@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 const Settings = () => {
+  const API_URL = import.meta.env.VITE_BASE_URL;
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [reminderTime, setReminderTime] = useState("");
   const [user, setUser] = useState({});
@@ -22,12 +23,9 @@ const Settings = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/user/view/${userId}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const response = await axios.get(`${API_URL}/api/user/view/${userId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setUser(response.data.user);
       } catch (err) {
         setError("Failed to fetch user details");
@@ -49,7 +47,7 @@ const Settings = () => {
     e.preventDefault();
     try {
       await axios.put(
-        "http://localhost:5000/api/user/update-reminder",
+        `${API_URL}/api/user/update-reminder`,
         { reminderTime },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -67,7 +65,7 @@ const Settings = () => {
       )
     ) {
       try {
-        await axios.delete(`http://localhost:5000/api/user/delete/${userId}`, {
+        await axios.delete(`${API_URL}/api/user/delete/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         localStorage.clear();

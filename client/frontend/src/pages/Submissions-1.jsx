@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const SubmissionsOne = () => {
+  const API_URL = import.meta.env.VITE_BASE_URL;
   const [questions, setQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
   const [feedback, setFeedback] = useState(null);
@@ -12,7 +13,7 @@ const SubmissionsOne = () => {
       return;
     }
 
-    fetch(`http://localhost:5000/api/submission/user-questions?user=${userId}`)
+    fetch(`${API_URL}/api/submission/user-questions?user=${userId}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -36,14 +37,11 @@ const SubmissionsOne = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(
-      "http://localhost:5000/api/submission/submit",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, answers: userAnswers }),
-      }
-    );
+    const response = await fetch(`${API_URL}/api/submission/submit`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId, answers: userAnswers }),
+    });
 
     const result = await response.json();
     if (response.ok) {

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Signup = () => {
+  const API_URL = import.meta.env.VITE_BASE_URL;
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -41,7 +44,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/users/signup", {
+      const response = await axios.post(`${API_URL}/api/users/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
