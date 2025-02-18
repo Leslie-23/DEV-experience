@@ -22,7 +22,6 @@ const snippetRoutes = require("./routes/snippet-routes");
 const app = express();
 app.use(express.json()); // To parse JSON bodies
 // app.use(ClerkExpressWithAuth());
-app.options("*", cors()); // Enable CORS for all routes. CORS is a real security risk and a B*tch to set up
 try {
   connectDB();
 
@@ -40,6 +39,22 @@ try {
       credentials: true, // Allow cookies and authorization headers
     })
   );
+  app.options("*", cors()); // Enable CORS for all routes. CORS is a real security risk and a B*tch to set up
+  app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
+    res.header(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, OPTIONS"
+    );
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.header("Access-Control-Allow-Credentials", "true");
+
+    if (req.method === "OPTIONS") {
+      return res.sendStatus(204); // Stop here for preflight requests
+    }
+
+    next();
+  });
 
   // favico issues in vercel
   app.get("/favicon.ico", (req, res) => res.status(204).end());
