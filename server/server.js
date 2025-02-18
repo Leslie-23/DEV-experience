@@ -31,9 +31,9 @@ try {
     cors({
       origin: [
         "http://localhost:5173",
-        "https://dev-experience-sj2j-kbjftg70q-leslie-23s-projects.vercel.app/",
-        "https://leslie23-dev-experience2k25.netlify.app/",
-        "https://dev-experience-sj2j.vercel.app/",
+        "https://dev-experience-sj2j-kbjftg70q-leslie-23s-projects.vercel.app",
+        "https://leslie23-dev-experience2k25.netlify.app",
+        "https://dev-experience-sj2j.vercel.app",
       ], // Allow these origins (dev and prod -- multple prod urls for load balancing (but might give syncing issues))
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
       allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
