@@ -237,7 +237,9 @@ const Dashboard = () => {
                 />
               </svg>
             </button>
-            <h1 className="text-3xl font-extrabold text-green-500">DX</h1>
+            <h1 className="text-2xl font-bold text-white flext items-start justify-start">
+              {/* DX */}
+            </h1>
             <div className="flex items-center  space-x-4">
               <button className="text-white">
                 {" "}
