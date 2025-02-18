@@ -6,8 +6,8 @@
 .package-lock.json
 
 # Build output
-# **/dist/
-# **/build/
+**/dist/
+**/build/
 
 # Logs
 **/npm-debug.log*
