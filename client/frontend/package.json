@@ -33,7 +33,7 @@
     "react-router-dom": "^7.1.5",
     "react-ui-animate": "^4.2.0",
     "typewriter-effect": "^2.21.0",
-    "vite-plugin-tailwindcss": "^0.0.0-0"
+    "vite-plugin-tailwindcss": "^2.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
