@@ -5,9 +5,7 @@
       "destination": "/index.html"
     }
   ],
-  "redirects": [
-    { "source": "/:match*", "destination": "/index.html", "permanent": false }
-  ],
+  "redirects": [],
   "headers": [],
   "cleanUrls": true
 }
