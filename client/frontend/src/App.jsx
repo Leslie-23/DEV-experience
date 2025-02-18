@@ -29,12 +29,13 @@ const routes = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* General Routes */}
-      <Route path="/" element={<Home />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Switch>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
-      {/* 
+        {/* 
       <Route path="/profile" element={<Profile />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="/projects/:id" element={<ProjectDetails />} />
@@ -43,17 +44,18 @@ const routes = createBrowserRouter(
       <Route path="/admin" element={<AdminPanel />} /> 
       */}
 
-      <Route path="/set-reminder" element={<SetReminder />} />
-      <Route path="/submissions" element={<Submissions />} />
-      <Route path="/submissions1" element={<SubmissionsOne />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/settings" element={<Settings />} />
-      <Route path="/languages" element={<SetLanguages />} />
-      <Route path="/streak" element={<Streak />} />
-      <Route path="/projects" element={<Projects />} />
+        <Route path="/set-reminder" element={<SetReminder />} />
+        <Route path="/submissions" element={<Submissions />} />
+        <Route path="/submissions1" element={<SubmissionsOne />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/languages" element={<SetLanguages />} />
+        <Route path="/streak" element={<Streak />} />
+        <Route path="/projects" element={<Projects />} />
 
-      {/* Catch-All Route for 404 */}
-      <Route path="*" element={<NotFound />} />
+        {/* Catch-All Route for 404 */}
+        <Route path="*" element={<NotFound />} />
+      </Switch>
     </>
   )
 );
