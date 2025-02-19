@@ -77,6 +77,24 @@ const Settings = () => {
     }
   };
 
+  //delete accout --test
+  // const handleDelete = async () => {
+  //   if (
+  //     !window.confirm(
+  //       "Are you sure you want to delete your account? This action cannot be undone!"
+  //     )
+  //   )
+  //     return;
+  //   try {
+  //     const userId = localStorage.getItem("userId");
+  //     await axios.delete(`${API_URL}/api/user/delete/${userId}`);
+  //     localStorage.removeItem("userId");
+  //     window.location.href = "/";
+  //   } catch (err) {
+  //     setError("Failed to delete account.");
+  //   }
+  // };
+
   // Logout User
   const handleLogout = () => {
     localStorage.clear();

@@ -23,7 +23,7 @@ cron.schedule("* * * * *", async () => {
   console.log("⏳ Checking for users to send problem sets...");
 
   const now = new Date();
-  const date = new Date().getDate().toLocaleString();
+  const date = new Date().toLocaleDateString("en-GB");
   const currentTime = `${now.getHours().toString().padStart(2, "0")}:${now
     .getMinutes()
     .toString()
@@ -44,7 +44,9 @@ cron.schedule("* * * * *", async () => {
       // Generate problem set
       const problems = await Utility.generateProblemSet();
       const problemsSync = reminder.questions;
-      const link = "http://localhost:5173/submissions1";
+      // const link = "http://localhost:5173/submissions1";
+      const link =
+        "https://leslie23-dev-experience2k25.netlify.app/submissions1";
       // console.log("📩 Sending the same questions:", problems);
 
       // console.log("Debugging problems:", problems, Array.isArray(problems));
