@@ -22,6 +22,7 @@ import NotFound from "./pages/404";
 import SetLanguages from "./pages/SetLanguages";
 import Streak from "./components/Streak";
 import Projects from "./pages/components/projects";
+import FAQs from "./pages/components/FAQs";
 import "./App.css";
 
 // Define routes using createBrowserRouter for better navigation and deployment on Vercel
@@ -52,6 +53,7 @@ const routes = createBrowserRouter(
       <Route path="/languages" element={<SetLanguages />} />
       <Route path="/streak" element={<Streak />} />
       <Route path="/projects" element={<Projects />} />
+      <Route path="/faqs" element={<FAQs />} />
 
       {/* Catch-All Route for 404 */}
       <Route path="*" element={<NotFound />} />
